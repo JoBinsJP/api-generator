@@ -1,0 +1,35 @@
+{
+  "name": "jobins/api-generator",
+  "description": "Generate api while writing test case",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bedram Tamang",
+      "email": "tmgbedu@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Jobins\\APIGenerator\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Jobins\\APIGenerator\\Tests\\": "tests"
+    }
+  },
+  "require-dev": {
+    "orchestra/testbench": "^6.15",
+    "phpunit/phpunit": "^9.0"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Jobins\\APIGenerator\\APIGeneratorServiceProvider"
+      ]
+    }
+  }
+}
