@@ -4,6 +4,7 @@ namespace Jobins\APIGenerator\Services;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
+use Jobins\APIGenerator\Rules\RequiredRule;
 
 trait ProcessRequestTrait
 {
@@ -45,16 +46,27 @@ trait ProcessRequestTrait
         return [
             $this->getClassIdentifier() => [
                 "content" => [
-                    "application/json" => [
-                        "schema"  => [
-                            "required"   => $this->getRequired($data),
-                            "properties" => $this->getProperties($data),
-                        ],
-                        "example" => $this->request["data"],
-                    ],
+                    "application/json" => $this->getParseRequestBodiesData($data),
                 ],
             ],
         ];
+    }
+
+
+    public function getParseRequestBodiesData($request)
+    {
+        $data           = [];
+        $data["schema"] = [
+            "required"   => $this->getRequired($request),
+            "properties" => $this->getProperties($request),
+        ];
+
+        if ( !$this->request["ignoreData"] ) {
+            $data["example"] = $this->request["data"];
+        }
+
+        return $data;
+
     }
 
     private function getRequired($rules)
@@ -80,7 +92,7 @@ trait ProcessRequestTrait
             $rulesArray = explode("|", $item);
 
             $data[$name] = [
-                "required"    => in_array("required", $rulesArray),
+                "required"    => RequiredRule::check($rulesArray),
                 "type"        => in_array(["integer", "number"], $rulesArray) ? "integer" : "string",
                 "description" => Arr::get($description, $name, ""),
             ];

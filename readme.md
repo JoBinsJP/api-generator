@@ -1,12 +1,21 @@
 # API Generator
+
 Generator api docs while writing test case
 
 ### Installation
+
 ```shell
 composer require jobins/api-generator --dev
 ```
 
+### Publish  assets
+
+```shell
+php artisan vendor:publish --provider="Jobins\APIGenerator\APIGeneratorServiceProvider"
+```
+
 ### Basic Uses
+
 ```php
 <?php
 
@@ -27,6 +36,34 @@ class RegistrationTest extends TestCase{
             ->assertJsonFragment([])
             ->assertJsonStructure(["message"])
             ->generate($this, true);    
+    }
+}
+```
+
+### Define parameters in descriptions method of FormRequest class.
+
+```php
+
+/**
+ * Class ExampleFormRequest
+ * @package Jobins\APIGenerator\Tests\Stubs
+ */
+class ExampleFormRequest extends FormRequest
+{
+    public function rules()
+    {
+        return [
+            "email"     => "required", // Required, String, 
+            "nickname"  => "sometimes|required", // Optional Field, String
+        ];
+    }
+
+    public function descriptions()
+    {
+        return [
+            "email"     => "Email of a new user.",
+            "nickname"  => "Nick name of a new user."
+        ];
     }
 }
 ```

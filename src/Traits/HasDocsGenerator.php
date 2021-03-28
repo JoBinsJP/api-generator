@@ -1,4 +1,5 @@
 <?php
+
 namespace Jobins\APIGenerator\Traits;
 
 /**
@@ -42,6 +43,11 @@ trait HasDocsGenerator
      */
     protected $d_request;
 
+    /**
+     * @var boolean
+     */
+    protected $d_ignore_request_data;
+
     public function setSummary($summary)
     {
         $this->d_summary = $summary;
@@ -59,6 +65,13 @@ trait HasDocsGenerator
     public function setRulesFromFormRequest($request)
     {
         $this->d_request = $request;
+
+        return $this;
+    }
+
+    public function ignoreRequestDataAsExample()
+    {
+        $this->d_ignore_request_data = true;
 
         return $this;
     }
@@ -86,6 +99,7 @@ trait HasDocsGenerator
             "header"      => $this->d_header,
             "url"         => $this->d_url,
             "method"      => $this->d_method,
+            "ignoreData"  => $this->d_ignore_request_data,
         ];
     }
 }
