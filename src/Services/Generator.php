@@ -95,14 +95,24 @@ class Generator
 
         return [
             $this->url => [
-                $this->request["method"] => [
-                    "summary"     => $this->request["summary"],
-                    "operationId" => $this->request["operationID"],
-                    "requestBody" => $this->parseRequestBody(),
-                    "responses"   => $this->parseResponse($responseData),
-                ],
+                $this->request["method"] => $this->getBasicPathInfoData($responseData),
             ],
         ];
+    }
+
+    public function getBasicPathInfoData($responseData)
+    {
+        $data                = [];
+        $data["summary"]     = $this->request["summary"];
+        $data["operationId"] = $this->request["operationID"];
+
+        if ( $requestBody = $this->parseRequestBody() ) {
+            $data["requestBody"] = $requestBody;
+        }
+
+        $data["responses"] = $this->parseResponse($responseData);
+
+        return $data;
     }
 
     public function parseResponse($originalResponseData)

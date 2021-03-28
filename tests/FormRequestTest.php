@@ -45,5 +45,22 @@ class FormRequestTest extends TestCase
 
         $this->assertFileExists($path);
     }
+
+    /** @test */
+    public function it_ignores_examples_if_it_set_to_ignore()
+    {
+        $path = config()->get("api-generator.file-path");
+
+        File::delete($path);
+
+        $this->setSummary("This is a example route")
+            ->setId("ExampleRoute")
+            ->setRulesFromFormRequest(NoDescriptionFormRequest::class)
+            ->ignoreRequestDataAsExample()
+            ->jsond("post", route("posts.store"), [])
+            ->generate($this, true);
+
+        $this->assertFileExists($path);
+    }
 }
 
