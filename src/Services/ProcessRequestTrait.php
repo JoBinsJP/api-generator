@@ -22,6 +22,10 @@ trait ProcessRequestTrait
 
     private function parseRequestBody()
     {
+        if ( Arr::get($this->request, "rule") == null ) {
+            return null;
+        }
+
         return [
             "\$ref" => "#/components/requestBodies/".$this->getClassIdentifier(),
         ];

@@ -16,6 +16,25 @@ class FormRequestRuleTest extends TestCase
 {
     use HasDocsGenerator;
 
+    /** @test */
+    public function it_does_not_has_request_bodies_if_form_is_not_present()
+    {
+        $path = config()->get("api-generator.file-path");
+
+        File::delete($path);
+
+        $this->setSummary("This is a example route")
+            ->setId("ExampleRoute")
+            ->jsond("post", route("posts.store"), [])
+            ->generate($this, true);
+
+        $this->assertFileExists($path);
+
+        $json = getJsonFromDocs();
+
+        $this->assertNull(Arr::get($json, "paths./api/posts.post.requestBody"));
+    }
+
     /**
      * @dataProvider requiredRuleDataProvider
      *
