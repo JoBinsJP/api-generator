@@ -9,7 +9,8 @@
     }
   ],
   "require": {
-    "php": "^7.4|^8.0"
+    "php":      "^7.4|^8.0",
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {
@@ -19,7 +20,10 @@
   "autoload-dev": {
     "psr-4": {
       "Jobins\\APIGenerator\\Tests\\": "tests"
-    }
+    },
+    "files": [
+      "tests/helper.php"
+    ]
   },
   "require-dev": {
     "orchestra/testbench": "^6.15",
