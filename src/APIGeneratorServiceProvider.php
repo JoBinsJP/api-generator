@@ -35,7 +35,9 @@ class APIGeneratorServiceProvider extends ServiceProvider
         ]);
 
         TestResponse::macro("generate", function ($testCase, $generate) {
-            if ( !$generate ) return;
+            if ( !$generate ) {
+                return;
+            }
 
             /** @var JsonResponse $response */
             $response = $this;

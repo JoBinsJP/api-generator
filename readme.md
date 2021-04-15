@@ -30,12 +30,20 @@ class RegistrationTest extends TestCase{
     {
         $this->setSummary("Register a new user.")
             ->setId("Register")
+            ->setSecurity(Security::BEARER)
             ->setRulesFromFormRequest(RegistrationRequest::class)
             ->jsond("post", route("registration.store"), $data)
             ->assertStatus(422)
             ->assertJsonFragment([])
             ->assertJsonStructure(["message"])
-            ->generate($this, true);    
+            ->defineResponseScheme([
+                "data.*"=>["description"=>"User Collection", "schemeId"=>"User", "type"=>"array"],
+                "data"=>["name"=>"User","type"=>"Object", "properties"=>[
+                    "name"=>"First name of the user",
+                    "lastname"=>"Last name of the user"
+                ]],
+                "message"=>["description"=>"Message for user", "type"=>"string"]
+            ])->generate($this, true);    
     }
 }
 ```

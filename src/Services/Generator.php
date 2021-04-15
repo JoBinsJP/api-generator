@@ -6,6 +6,9 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
+use Jobins\APIGenerator\Security\HasParameter;
+use Jobins\APIGenerator\Security\HasResponse;
+use Jobins\APIGenerator\Security\HasSecurity;
 
 /**
  * Class Generator
@@ -13,7 +16,10 @@ use Illuminate\Support\Facades\File;
  */
 class Generator
 {
-    use ProcessRequestTrait;
+    use ProcessRequestTrait,
+        HasParameter,
+        HasSecurity,
+        HasResponse;
 
     protected $data = [];
 
@@ -29,11 +35,16 @@ class Generator
         $this->initializeFile();
 
         $this->data = array_merge($this->data, [
+            "servers" => [
+                [
+                    "url" => config()->get("api-generator.servers.url"),
+                ],
+            ],
             "openapi" => config()->get("api-generator.openapi"),
             "info"    => [
-                "title" => config()->get("api-generator.title"),
+                "title"   => config()->get("api-generator.title"),
+                "version" => config()->get("api-generator.version"),
             ],
-            "version" => config()->get("api-generator.version"),
         ]);
     }
 
@@ -74,9 +85,15 @@ class Generator
 
     private function parseParam()
     {
-        $data = Arr::get($this->data, "paths", []);
+        [$url, $parameters] = $this->preparePathWithParam();
+        $method  = $this->request["method"];
+        $pathKey = "paths.{$url}.{$method}";
 
-        $this->data["paths"] = array_merge($data, $this->getBasicPathInfo($data));
+        $pathData = Arr::get($this->data, $pathKey, []);
+        $pathData = $pathData + $this->getBasicPathInfo($pathData, $parameters);
+
+        data_set($this->data, $pathKey, $pathData);
+
 
         $requestBodies = Arr::get($this->data, "components.requestBodies", []);
 
@@ -85,25 +102,31 @@ class Generator
         data_set($this->data, "components.requestBodies", $requestBodies);
     }
 
-    public function getBasicPathInfo($data)
+    public function getBasicPathInfo($pathData, $parameters)
     {
-        $this->url = parse_url($this->request["url"], PHP_URL_PATH);
+        $responseData = Arr::get($pathData, "responses", []);
 
-        $responseKey = $this->url.".".$this->request["method"].".responses";
+        $return = $this->getBasicPathInfoData($responseData);
 
-        $responseData = Arr::get($data, $responseKey, []);
+        data_set($return, "parameters", $parameters);
 
-        return [
-            $this->url => [
-                $this->request["method"] => $this->getBasicPathInfoData($responseData),
-            ],
-        ];
+        return $return;
     }
 
     public function getBasicPathInfoData($responseData)
     {
-        $data                = [];
-        $data["summary"]     = $this->request["summary"];
+        $data = [];
+
+        if ( $security = $this->processSecurity($this->request) ) {
+            $data["security"] = $security;
+        }
+
+        $data["summary"] = $this->request["summary"];
+
+        if ( $tags = Arr::get($this->request, "tags") ) {
+            $data["tags"] = $tags;
+        }
+
         $data["operationId"] = $this->request["operationID"];
 
         if ( $requestBody = $this->parseRequestBody() ) {
@@ -113,25 +136,5 @@ class Generator
         $data["responses"] = $this->parseResponse($responseData);
 
         return $data;
-    }
-
-    public function parseResponse($originalResponseData)
-    {
-        $code = $this->response->getStatusCode();
-
-        $data = Arr::get($originalResponseData, $code, []);
-
-        $responseData = [
-            $code => [
-                "content" => [
-                    "application/json" => [
-                        "schema"  => ["type" => "object"],
-                        "example" => json_decode($this->response->getContent(), true),
-                    ],
-                ],
-            ],
-        ];
-
-        return $responseData + $originalResponseData;
     }
 }
