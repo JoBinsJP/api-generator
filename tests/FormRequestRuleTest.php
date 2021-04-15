@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\File;
 use Jobins\APIGenerator\Tests\Stubs\NoDescriptionFormRequest;
 use Jobins\APIGenerator\Tests\Stubs\RuleExampleFormRequest;
 use Jobins\APIGenerator\Traits\HasDocsGenerator;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class FormRequestRuleTest
@@ -57,6 +58,30 @@ class FormRequestRuleTest extends TestCase
         $schema = getRequestBodyScheme(RuleExampleFormRequest::class);
 
         $this->assertEquals($required, Arr::get($schema, "schema.required"));
+    }
+
+    /** @test */
+    public function the_form_request_descriptions_assocites_in_body()
+    {
+        $path = config()->get("api-generator.file-path");
+
+        File::delete($path);
+
+        $this->setSummary("This is a example route")
+            ->setId("ExampleRoute")
+            ->setRulesFromFormRequest(RuleExampleFormRequest::class)
+            ->jsond("post", route("posts.store"), [])
+            ->generate($this, true);
+
+        $schema = getRequestBodyScheme(RuleExampleFormRequest::class);
+
+        $properties = Arr::get($schema, "schema.properties");
+
+        foreach ($properties as $key => $property) {
+            $expected = Arr::get((new RuleExampleFormRequest())->descriptions(), $key);
+
+            $this->assertEquals($expected, $property['description']);
+        }
     }
 
     public function requiredRuleDataProvider()

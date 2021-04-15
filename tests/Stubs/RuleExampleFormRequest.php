@@ -14,4 +14,11 @@ class RuleExampleFormRequest extends FormRequest
             "last_name" => "nullable|required",
         ];
     }
+
+    public function descriptions()
+    {
+        return [
+            "name" => "Full name of a user",
+        ];
+    }
 }

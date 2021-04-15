@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Routing\Router;
 use Jobins\APIGenerator\APIGeneratorServiceProvider;
 use Jobins\APIGenerator\Tests\Stubs\ExampleController;
+use Jobins\APIGenerator\Tests\Stubs\UsersController;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 /**
@@ -39,6 +40,9 @@ class TestCase extends BaseTestCase
      */
     protected function defineRoutes($router)
     {
+        $router->get("/api/users", [UsersController::class, "index"])->name("users.index");
+        $router->get("/api/users/{id}", [UsersController::class, "show"])->name("users.show");
+        $router->delete("/api/users/{id}", [UsersController::class, "destroy"])->name("users.destroy");
         $router->post("/api/posts", [ExampleController::class, "index"])->name("posts.store");
     }
 }

@@ -9,6 +9,7 @@ use Jobins\APIGenerator\Traits\HasDocsGenerator;
 
 /**
  * Class FormRequestTest
+ *
  * @package Jobins\APIGenerator\Tests
  */
 class FormRequestTest extends TestCase
@@ -18,24 +19,20 @@ class FormRequestTest extends TestCase
     /** @test */
     public function it_generates_api_docs_even_if_form_request_does_not_exist()
     {
-        $path = config()->get("api-generator.file-path");
-
-        File::delete($path);
+        deleteDocs();
 
         $this->setSummary("This is a example route")
             ->setId("ExampleRoute")
             ->jsond("post", route("posts.store"), [])
             ->generate($this, true);
 
-        $this->assertFileExists($path);
+        $this->assertFileExists(config()->get("api-generator.file-path"));
     }
 
     /** @test */
     public function it_generates_api_docs_form_request_does_not_have_description_method()
     {
-        $path = config()->get("api-generator.file-path");
-
-        File::delete($path);
+        deleteDocs();
 
         $this->setSummary("This is a example route")
             ->setId("ExampleRoute")
@@ -43,15 +40,13 @@ class FormRequestTest extends TestCase
             ->jsond("post", route("posts.store"), [])
             ->generate($this, true);
 
-        $this->assertFileExists($path);
+        $this->assertFileExists(config()->get("api-generator.file-path"));
     }
 
     /** @test */
     public function it_ignores_examples_if_it_set_to_ignore()
     {
-        $path = config()->get("api-generator.file-path");
-
-        File::delete($path);
+        deleteDocs();
 
         $this->setSummary("This is a example route")
             ->setId("ExampleRoute")
@@ -60,7 +55,7 @@ class FormRequestTest extends TestCase
             ->jsond("post", route("posts.store"), [])
             ->generate($this, true);
 
-        $this->assertFileExists($path);
+        $this->assertFileExists(config()->get("api-generator.file-path"));
     }
 }
 
