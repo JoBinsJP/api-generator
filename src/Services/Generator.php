@@ -99,7 +99,9 @@ class Generator
 
         $requestBodies = $requestBodies + $this->parseRequestBodies($requestBodies);
 
-        data_set($this->data, "components.requestBodies", $requestBodies);
+        if ( !empty($requestBodies) ) {
+            data_set($this->data, "components.requestBodies", $requestBodies);
+        }
     }
 
     public function getBasicPathInfo($pathData, $parameters)

@@ -56,16 +56,23 @@ trait HasResponse
 
         $data = Arr::get($originalResponseData, $code, []);
 
+        $schema     = [];
+        $properties = $this->processResponse();
+        if ( !empty($properties) ) {
+            $schema["properties"] = $this->processResponse();
+        }
+
+        $example = json_decode($this->response->getContent(), true) ?? [];
+        if ( !empty($example) ) {
+            $schema["example"] = $example;
+        }
 
         $responseData = [
             $code => [
                 "description" => "{$code} status response",
                 "content"     => [
                     "application/json" => [
-                        "schema" => [
-                            "properties" => $this->processResponse(),
-                            "example"    => json_decode($this->response->getContent(), true),
-                        ],
+                        "schema" => $schema,
                     ],
                 ],
             ],
@@ -77,9 +84,9 @@ trait HasResponse
     private function defineSchema(string $name, string $type, array $properties)
     {
         $schemaData = [
-            "type"  => $type,
-            "items" => [
-                "type"       => "object",
+            "type"       => $type,
+            "items"      => [
+                "type" => "object",
             ],
             "properties" => $this->getSchemaProperties($properties),
         ];
@@ -105,8 +112,6 @@ trait HasResponse
             "type"       => "object",
             "properties" => $this->processResponse(),
         ];
-
-//        data_set($this->data, "components.schemas.{$schemaName}", $schemaData);
 
         return "#/components/schemas/{$schemaName}";
     }

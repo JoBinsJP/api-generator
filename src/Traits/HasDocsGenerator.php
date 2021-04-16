@@ -60,7 +60,7 @@ trait HasDocsGenerator
     /**
      * @var
      */
-    protected $d_security;
+    protected array $d_security = [];
 
     /**
      * @var
@@ -122,11 +122,11 @@ trait HasDocsGenerator
     }
 
     /**
-     * @param $security
+     * @param array $security
      *
      * @return $this
      */
-    public function setSecurity($security): self
+    public function setSecurity(array $security): self
     {
         $this->d_security = $security;
 
