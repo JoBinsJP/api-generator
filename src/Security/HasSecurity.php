@@ -8,19 +8,21 @@ trait HasSecurity
 {
     public function processSecurity($request)
     {
-        $security = Arr::get($this->request, "security");
+        $securities = Arr::get($this->request, "security");
 
-        if ( is_null($security) ) {
+        if ( empty($securities) ) {
             return null;
         }
 
-        $schema = (new $security)->getSchema();
+        return collect($securities)->map(function ($security) {
+            $schema = (new $security)->getSchema();
 
-        $this->ensureSecuritySchemaExists($schema);
+            $this->ensureSecuritySchemaExists($schema);
 
-        return [
-            $schema["name"] => [],
-        ];
+            return [
+                $schema["name"] => [],
+            ];
+        })->toArray();
     }
 
     public function ensureSecuritySchemaExists($schema)

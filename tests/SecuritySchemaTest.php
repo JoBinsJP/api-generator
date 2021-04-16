@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Arr;
 use Jobins\APIGenerator\Security\Bearer;
 use Jobins\APIGenerator\Tests\TestCase;
 use Jobins\APIGenerator\Traits\HasDocsGenerator;
@@ -14,15 +15,17 @@ class SecuritySchemaTest extends TestCase
     /** @test */
     public function it_generates_security_schemas()
     {
+        deleteDocs();
+
         $this->setSummary("User list API.")
             ->setId("Register")
-            ->setSecurity(Bearer::class)
+            ->setSecurity([Bearer::class])
             ->jsond("get", route("users.index"))
             ->assertStatus(200)
             ->generate($this, true);
 
-//        $json = getJsonFromDocs();
+        $json = getJsonForEndpoint(route("users.index"));
 
-//        $this->assertJsonFileEqualsJsonFile("",$json);
+        $this->assertCount(1, Arr::get($json,"security"));
     }
 }
