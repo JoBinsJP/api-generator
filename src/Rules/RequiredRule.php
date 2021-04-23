@@ -25,6 +25,10 @@ class RequiredRule
      */
     public static function check($rules): bool
     {
+        $rules = collect($rules)->filter(function ($item) {
+            return is_string($item);
+        })->toArray();
+
         if ( count(array_intersect(self::CONTAIN, $rules)) == 0 ) {
             return false;
         }
