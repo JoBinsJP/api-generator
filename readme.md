@@ -1,6 +1,19 @@
 # API Generator
 
-Generator api docs while writing test case
+Generate api docs while writing test case (Laravel). 
+
+### Idea
+It generates api docs with [OpenAPI Specification](https://swagger.io/specification) while wiring test case in 
+laravel application. The generated docs can preview on swagger ui either integrate laravel-swagger-ui on application 
+or [Swagger Editor online](https://editor.swagger.io/).
+
+##### Features
+* All basic setup features as available in swagger api.
+* Request body will define using Laravel FormRequest class.
+* The Request body example will grab from test data that used on testing.
+* Route parameters will define from Laravel route.
+* Response example grabs from the test responses.
+
 
 ### Installation
 
@@ -28,22 +41,25 @@ class RegistrationTest extends TestCase{
     /** @test */
     public function it_register_a_new_user()
     {
+        $responseSchema = [
+            "description" => "A User Object",
+            "define"      => [
+                "data.*"  => ["refSchema" => "UserSchema"],
+                "message" => "Message for user",
+            ],
+        ];
+        
         $this->setSummary("Register a new user.")
             ->setId("Register")
-            ->setSecurity(Security::BEARER)
+            ->setSecurity([Security::BEARER])
+            ->setTags(["Posts"])
             ->setRulesFromFormRequest(RegistrationRequest::class)
             ->jsond("post", route("registration.store"), $data)
             ->assertStatus(422)
             ->assertJsonFragment([])
             ->assertJsonStructure(["message"])
-            ->defineResponseScheme([
-                "data.*"=>["description"=>"User Collection", "schemeId"=>"User", "type"=>"array"],
-                "data"=>["name"=>"User","type"=>"Object", "properties"=>[
-                    "name"=>"First name of the user",
-                    "lastname"=>"Last name of the user"
-                ]],
-                "message"=>["description"=>"Message for user", "type"=>"string"]
-            ])->generate($this, true);    
+            ->defineResponseSchema($responseSchema)
+            ->generate($this, true);    
     }
 }
 ```
