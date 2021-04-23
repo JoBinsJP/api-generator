@@ -93,7 +93,11 @@ trait ProcessRequestTrait
 
         foreach ($rules as $name => $item) {
 
-            $rulesArray = explode("|", $item);
+            $rulesArray = $item;
+
+            if ( !is_array($item) ) {
+                $rulesArray = explode("|", $item);
+            }
 
             $data[$name] = [
                 "required"    => RequiredRule::check($rulesArray),
@@ -107,14 +111,18 @@ trait ProcessRequestTrait
 
     public function getRules($class)
     {
-        if ( !method_exists($class, 'rules') ) return [];
+        if ( !method_exists($class, 'rules') ) {
+            return [];
+        }
 
         return $class->rules();
     }
 
     public function getDescriptions($class)
     {
-        if ( !method_exists($class, 'descriptions') ) return [];
+        if ( !method_exists($class, 'descriptions') ) {
+            return [];
+        }
 
         return $class->descriptions();
     }

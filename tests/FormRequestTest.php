@@ -4,6 +4,7 @@ namespace Jobins\APIGenerator\Tests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\File;
+use Jobins\APIGenerator\Tests\Stubs\FormRequestInArray;
 use Jobins\APIGenerator\Tests\Stubs\NoDescriptionFormRequest;
 use Jobins\APIGenerator\Traits\HasDocsGenerator;
 
@@ -51,6 +52,21 @@ class FormRequestTest extends TestCase
         $this->setSummary("This is a example route")
             ->setId("ExampleRoute")
             ->setRulesFromFormRequest(NoDescriptionFormRequest::class)
+            ->ignoreRequestDataAsExample()
+            ->jsond("post", route("posts.store"), [])
+            ->generate($this, true);
+
+        $this->assertFileExists(config()->get("api-generator.file-path"));
+    }
+
+    /** @test */
+    public function it_supports_form_request_in_array_and_class()
+    {
+        deleteDocs();
+
+        $this->setSummary("This is a example route")
+            ->setId("FormRequestInArray")
+            ->setRulesFromFormRequest(FormRequestInArray::class)
             ->ignoreRequestDataAsExample()
             ->jsond("post", route("posts.store"), [])
             ->generate($this, true);
