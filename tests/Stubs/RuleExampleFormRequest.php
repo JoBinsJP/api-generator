@@ -1,6 +1,6 @@
 <?php
 
-namespace Jobins\APIGenerator\Tests\Stubs;
+namespace JoBins\APIGenerator\Tests\Stubs;
 
 use Illuminate\Foundation\Http\FormRequest;
 

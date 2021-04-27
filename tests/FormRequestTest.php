@@ -1,17 +1,15 @@
 <?php
 
-namespace Jobins\APIGenerator\Tests;
+namespace JoBins\APIGenerator\Tests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\File;
-use Jobins\APIGenerator\Tests\Stubs\FormRequestInArray;
-use Jobins\APIGenerator\Tests\Stubs\NoDescriptionFormRequest;
-use Jobins\APIGenerator\Traits\HasDocsGenerator;
+use JoBins\APIGenerator\Tests\Stubs\FormRequestInArray;
+use JoBins\APIGenerator\Tests\Stubs\NoDescriptionFormRequest;
+use JoBins\APIGenerator\Traits\HasDocsGenerator;
 
 /**
  * Class FormRequestTest
  *
- * @package Jobins\APIGenerator\Tests
+ * @package JoBins\APIGenerator\Tests
  */
 class FormRequestTest extends TestCase
 {

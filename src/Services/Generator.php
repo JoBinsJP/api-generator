@@ -1,18 +1,17 @@
 <?php
 
-namespace Jobins\APIGenerator\Services;
+namespace JoBins\APIGenerator\Services;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Jobins\APIGenerator\Security\HasParameter;
-use Jobins\APIGenerator\Security\HasResponse;
-use Jobins\APIGenerator\Security\HasSecurity;
+use JoBins\APIGenerator\Security\HasParameter;
+use JoBins\APIGenerator\Security\HasResponse;
+use JoBins\APIGenerator\Security\HasSecurity;
 
 /**
  * Class Generator
- * @package Jobins\APIGenerator
+ * @package JoBins\APIGenerator
  */
 class Generator
 {

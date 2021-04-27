@@ -1,11 +1,11 @@
 <?php
 
-namespace Jobins\APIGenerator\Security;
+namespace JoBins\APIGenerator\Security;
 
 /**
  * Class Bearer
  *
- * @package Jobins\APIGenerator\Security
+ * @package JoBins\APIGenerator\Security
  */
 class Bearer
 {

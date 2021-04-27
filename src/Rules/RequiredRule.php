@@ -1,10 +1,10 @@
 <?php
 
-namespace Jobins\APIGenerator\Rules;
+namespace JoBins\APIGenerator\Rules;
 
 /**
  * Class RequiredRule
- * @package Jobins\APIGenerator\Rules
+ * @package JoBins\APIGenerator\Rules
  */
 class RequiredRule
 {

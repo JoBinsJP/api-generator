@@ -1,12 +1,12 @@
 <?php
 
-namespace Jobins\APIGenerator\Tests\Stubs;
+namespace JoBins\APIGenerator\Tests\Stubs;
 
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class ExampleController
- * @package Jobins\APIGenerator\Tests\Stubs
+ * @package JoBins\APIGenerator\Tests\Stubs
  */
 class ExampleController
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Jobins\APIGenerator\Tests\Stubs;
+namespace JoBins\APIGenerator\Tests\Stubs;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class ExampleFormRequest
- * @package Jobins\APIGenerator\Tests\Stubs
+ * @package JoBins\APIGenerator\Tests\Stubs
  */
 class ExampleFormRequest extends FormRequest
 {

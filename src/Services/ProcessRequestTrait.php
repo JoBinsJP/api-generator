@@ -1,10 +1,10 @@
 <?php
 
-namespace Jobins\APIGenerator\Services;
+namespace JoBins\APIGenerator\Services;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
-use Jobins\APIGenerator\Rules\RequiredRule;
+use JoBins\APIGenerator\Rules\RequiredRule;
 
 trait ProcessRequestTrait
 {

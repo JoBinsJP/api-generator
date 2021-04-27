@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Arr;
-use Jobins\APIGenerator\Security\Bearer;
-use Jobins\APIGenerator\Tests\TestCase;
-use Jobins\APIGenerator\Traits\HasDocsGenerator;
+use JoBins\APIGenerator\Security\Bearer;
+use JoBins\APIGenerator\Tests\TestCase;
+use JoBins\APIGenerator\Traits\HasDocsGenerator;
 
 /**
  * Class SecuritySchemaTest

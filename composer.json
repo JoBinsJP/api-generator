@@ -14,12 +14,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Jobins\\APIGenerator\\": "src"
+      "JoBins\\APIGenerator\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Jobins\\APIGenerator\\Tests\\": "tests"
+      "JoBins\\APIGenerator\\Tests\\": "tests"
     },
     "files": [
       "tests/helper.php"
@@ -32,7 +32,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Jobins\\APIGenerator\\APIGeneratorServiceProvider"
+        "JoBins\\APIGenerator\\APIGeneratorServiceProvider"
       ]
     }
   }

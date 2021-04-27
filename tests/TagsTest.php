@@ -1,9 +1,9 @@
 <?php
 
-namespace Jobins\APIGenerator\Tests;
+namespace JoBins\APIGenerator\Tests;
 
 use Illuminate\Support\Arr;
-use Jobins\APIGenerator\Traits\HasDocsGenerator;
+use JoBins\APIGenerator\Traits\HasDocsGenerator;
 
 class TagsTest extends TestCase
 {
