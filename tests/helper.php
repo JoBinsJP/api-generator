@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
-use Jobins\APIGenerator\Tests\Stubs\RuleExampleFormRequest;
 
 function deleteDocs()
 {

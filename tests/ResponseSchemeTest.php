@@ -1,16 +1,14 @@
 <?php
 
-namespace Jobins\APIGenerator\Tests;
+namespace JoBins\APIGenerator\Tests;
 
 use Illuminate\Support\Arr;
-use Jobins\APIGenerator\Tests\Stubs\RuleExampleFormRequest;
-use Jobins\APIGenerator\Tests\TestCase;
-use Jobins\APIGenerator\Traits\HasDocsGenerator;
+use JoBins\APIGenerator\Traits\HasDocsGenerator;
 
 /**
  * Class ResponseSchemeTest
  *
- * @package Jobins\APIGenerator\Tests\Stubs
+ * @package JoBins\APIGenerator\Tests\Stubs
  */
 class ResponseSchemeTest extends TestCase
 {

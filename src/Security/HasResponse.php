@@ -1,6 +1,6 @@
 <?php
 
-namespace Jobins\APIGenerator\Security;
+namespace JoBins\APIGenerator\Security;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;

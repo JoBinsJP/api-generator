@@ -1,10 +1,10 @@
 <?php
 
-namespace Jobins\APIGenerator;
+namespace JoBins\APIGenerator;
 
 /**
  * Class APIGeneratorFactory
- * @package Jobins\APIGenerator
+ * @package JoBins\APIGenerator
  */
 class APIGeneratorFactory
 {

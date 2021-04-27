@@ -1,15 +1,14 @@
 <?php
 
-namespace Jobins\APIGenerator\Tests;
+namespace JoBins\APIGenerator\Tests;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\File;
-use Jobins\APIGenerator\Traits\HasDocsGenerator;
+use JoBins\APIGenerator\Traits\HasDocsGenerator;
 
 /**
  * Class RouteParameterTest
  *
- * @package Jobins\APIGenerator\Tests
+ * @package JoBins\APIGenerator\Tests
  */
 class RouteParameterTest extends TestCase
 {

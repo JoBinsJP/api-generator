@@ -1,17 +1,15 @@
 <?php
 
-namespace Jobins\APIGenerator\Tests;
+namespace JoBins\APIGenerator\Tests;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Jobins\APIGenerator\Tests\Stubs\NoDescriptionFormRequest;
-use Jobins\APIGenerator\Tests\Stubs\RuleExampleFormRequest;
-use Jobins\APIGenerator\Traits\HasDocsGenerator;
-use Symfony\Component\HttpFoundation\Request;
+use JoBins\APIGenerator\Tests\Stubs\RuleExampleFormRequest;
+use JoBins\APIGenerator\Traits\HasDocsGenerator;
 
 /**
  * Class FormRequestRuleTest
- * @package Jobins\APIGenerator\Tests
+ * @package JoBins\APIGenerator\Tests
  */
 class FormRequestRuleTest extends TestCase
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Jobins\APIGenerator\Tests;
+namespace JoBins\APIGenerator\Tests;
 
-use Jobins\APIGenerator\Tests\Stubs\ExampleFormRequest;
-use Jobins\APIGenerator\Traits\HasDocsGenerator;
+use JoBins\APIGenerator\Tests\Stubs\ExampleFormRequest;
+use JoBins\APIGenerator\Traits\HasDocsGenerator;
 use Illuminate\Support\Facades\File;
 
 /**
  * Class GeneratorTest
- * @package Jobins\APIGenerator\Tests
+ * @package JoBins\APIGenerator\Tests
  */
 class FileSetupTest extends TestCase
 {

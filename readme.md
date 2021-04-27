@@ -70,7 +70,7 @@ class RegistrationTest extends TestCase{
 
 /**
  * Class ExampleFormRequest
- * @package Jobins\APIGenerator\Tests\Stubs
+ * @package JoBins\APIGenerator\Tests\Stubs
  */
 class ExampleFormRequest extends FormRequest
 {

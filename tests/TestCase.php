@@ -1,17 +1,17 @@
 <?php
 
-namespace Jobins\APIGenerator\Tests;
+namespace JoBins\APIGenerator\Tests;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Routing\Router;
-use Jobins\APIGenerator\APIGeneratorServiceProvider;
-use Jobins\APIGenerator\Tests\Stubs\ExampleController;
-use Jobins\APIGenerator\Tests\Stubs\UsersController;
+use JoBins\APIGenerator\APIGeneratorServiceProvider;
+use JoBins\APIGenerator\Tests\Stubs\ExampleController;
+use JoBins\APIGenerator\Tests\Stubs\UsersController;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
 /**
  * Class TestCase
- * @package Jobins\APIGenerator
+ * @package JoBins\APIGenerator
  */
 class TestCase extends BaseTestCase
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Jobins\APIGenerator\Tests;
+namespace JoBins\APIGenerator\Tests;
 
-use Jobins\APIGenerator\Rules\RequiredRule;
+use JoBins\APIGenerator\Rules\RequiredRule;
 
 /**
  * Class RequireRuleTest
- * @package Jobins\APIGenerator\Tests
+ * @package JoBins\APIGenerator\Tests
  */
 class RequireRuleTest extends TestCase
 {

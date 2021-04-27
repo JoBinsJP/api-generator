@@ -1,6 +1,6 @@
 <?php
 
-namespace Jobins\APIGenerator\Traits;
+namespace JoBins\APIGenerator\Traits;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -8,7 +8,7 @@ use Illuminate\Testing\TestResponse;
 
 /**
  * Class HasDocsGenerator
- * @package Jobins\APIGenerator
+ * @package JoBins\APIGenerator
  */
 trait HasDocsGenerator
 {

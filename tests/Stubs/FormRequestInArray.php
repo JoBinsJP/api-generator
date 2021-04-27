@@ -1,6 +1,6 @@
 <?php
 
-namespace Jobins\APIGenerator\Tests\Stubs;
+namespace JoBins\APIGenerator\Tests\Stubs;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Class FormRequestInArray
  *
- * @package Jobins\APIGenerator\Tests\Stubs
+ * @package JoBins\APIGenerator\Tests\Stubs
  */
 class FormRequestInArray extends FormRequest
 {
@@ -23,7 +23,7 @@ class FormRequestInArray extends FormRequest
 /**
  * Class EmailRule
  *
- * @package Jobins\APIGenerator\Tests\Stubs
+ * @package JoBins\APIGenerator\Tests\Stubs
  */
 class EmailRule implements Rule
 {

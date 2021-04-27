@@ -1,11 +1,11 @@
 <?php
 
-namespace Jobins\APIGenerator;
+namespace JoBins\APIGenerator;
 
-use Illuminate\Support\ServiceProvider;
-use Jobins\APIGenerator\Services\Generator;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\ServiceProvider;
 use Illuminate\Testing\TestResponse;
+use JoBins\APIGenerator\Services\Generator;
 
 /**
  * Class APIGeneratorServiceProvider

@@ -1,13 +1,13 @@
 <?php
 
-namespace Jobins\APIGenerator\Tests\Stubs;
+namespace JoBins\APIGenerator\Tests\Stubs;
 
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class UsersController
  *
- * @package Jobins\APIGenerator\Tests\Stubs
+ * @package JoBins\APIGenerator\Tests\Stubs
  */
 class UsersController
 {
@@ -37,7 +37,7 @@ class UsersController
                     "name"    => "Vedas Bomjon",
                     "email"   => "bedram@jobins.jp",
                     "company" => [
-                        "name"    => "Jobins Inc.",
+                        "name"    => "JoBins Inc.",
                         "country" => "Japan",
                     ],
                 ],
