@@ -26,6 +26,6 @@ class SecuritySchemaTest extends TestCase
 
         $json = getJsonForEndpoint(route("users.index"));
 
-        $this->assertCount(1, Arr::get($json,"security"));
+        $this->assertCount(1, Arr::get($json, "security"));
     }
 }

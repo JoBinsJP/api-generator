@@ -18,10 +18,10 @@ class APIGeneratorServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/api-generator.php', 'api-generator'
+            __DIR__.'/../config/api-generator.php',
+            'api-generator'
         );
     }
-
 
     /**
      * Bootstrap any package services.
@@ -34,8 +34,8 @@ class APIGeneratorServiceProvider extends ServiceProvider
             __DIR__.'/../config/api-generator.php' => config_path('api-generator.php'),
         ]);
 
-        TestResponse::macro("generate", function ($testCase, $generate) {
-            if ( !$generate ) {
+        TestResponse::macro("generate", function ($testCase, bool $generate = true) {
+            if (! $generate) {
                 return;
             }
 

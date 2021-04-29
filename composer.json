@@ -1,6 +1,15 @@
 {
   "name": "jobins/api-generator",
-  "description": "Generate api while writing test case",
+  "description": "Generate api docs while writing test case (Laravel).",
+  "keywords": [
+    "JoBins",
+    "documentation",
+    "api",
+    "swagger",
+    "openapi",
+    "phpunit"
+  ],
+  "homepage": "https://github.com/JoBinsJP/api-genereator",
   "license": "MIT",
   "authors": [
     {
@@ -17,6 +26,12 @@
       "JoBins\\APIGenerator\\": "src"
     }
   },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "psalm": "vendor/bin/psalm",
+    "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+    "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+  },
   "autoload-dev": {
     "psr-4": {
       "JoBins\\APIGenerator\\Tests\\": "tests"
@@ -27,7 +42,9 @@
   },
   "require-dev": {
     "orchestra/testbench": "^6.15",
-    "phpunit/phpunit": "^9.0"
+    "phpunit/phpunit": "^9.0",
+    "friendsofphp/php-cs-fixer": "^2.18",
+    "vimeo/psalm": "^4.7"
   },
   "extra": {
     "laravel": {

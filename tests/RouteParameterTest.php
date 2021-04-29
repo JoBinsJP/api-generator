@@ -38,7 +38,6 @@ class RouteParameterTest extends TestCase
         $this->assertCount(3, Arr::get($json, "paths./api/users/{id}.get.parameters") ?? []);
     }
 
-
     /** @test */
     public function it_generates_route_parameters_with_query()
     {

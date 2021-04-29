@@ -15,10 +15,10 @@ use JoBins\APIGenerator\Security\HasSecurity;
  */
 class Generator
 {
-    use ProcessRequestTrait,
-        HasParameter,
-        HasSecurity,
-        HasResponse;
+    use ProcessRequestTrait;
+    use HasParameter;
+    use HasSecurity;
+    use HasResponse;
 
     protected $data = [];
 
@@ -40,8 +40,8 @@ class Generator
                 ],
             ],
             "openapi" => config()->get("api-generator.openapi"),
-            "info"    => [
-                "title"   => config()->get("api-generator.title"),
+            "info" => [
+                "title" => config()->get("api-generator.title"),
                 "version" => config()->get("api-generator.version"),
             ],
         ]);
@@ -56,17 +56,16 @@ class Generator
 
         $path = pathinfo($this->filePath)["dirname"];
 
-        if ( !file_exists($path) ) {
+        if (! file_exists($path)) {
             mkdir($path, 0777, true);
         }
 
-        if ( !File::exists($this->filePath) ) {
+        if (! File::exists($this->filePath)) {
             File::put($this->filePath, json_encode([]));
         }
 
         $this->data = json_decode(file_get_contents($this->filePath), true) ?? [];
     }
-
 
     public function setResponse($response)
     {
@@ -85,7 +84,7 @@ class Generator
     private function parseParam()
     {
         [$url, $parameters] = $this->preparePathWithParam();
-        $method  = $this->request["method"];
+        $method = $this->request["method"];
         $pathKey = "paths.{$url}.{$method}";
 
         $pathData = Arr::get($this->data, $pathKey, []);
@@ -96,9 +95,9 @@ class Generator
 
         $requestBodies = Arr::get($this->data, "components.requestBodies", []);
 
-        $requestBodies = $requestBodies + $this->parseRequestBodies($requestBodies);
+        $requestBodies = $requestBodies + $this->parseRequestBodies();
 
-        if ( !empty($requestBodies) ) {
+        if (! empty($requestBodies)) {
             data_set($this->data, "components.requestBodies", $requestBodies);
         }
     }
@@ -118,19 +117,19 @@ class Generator
     {
         $data = [];
 
-        if ( $security = $this->processSecurity($this->request) ) {
+        if ($security = $this->processSecurity($this->request)) {
             $data["security"] = $security;
         }
 
         $data["summary"] = $this->request["summary"];
 
-        if ( $tags = Arr::get($this->request, "tags") ) {
+        if ($tags = Arr::get($this->request, "tags")) {
             $data["tags"] = $tags;
         }
 
         $data["operationId"] = $this->request["operationID"];
 
-        if ( $requestBody = $this->parseRequestBody() ) {
+        if ($requestBody = $this->parseRequestBody()) {
             $data["requestBody"] = $requestBody;
         }
 

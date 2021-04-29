@@ -21,8 +21,8 @@ class ResponseSchemeTest extends TestCase
 
         $responseSchema = [
             "description" => "A User Object",
-            "define"      => [
-                "data.*"  => ["refSchema" => "UserSchema"],
+            "define" => [
+                "data.*" => ["refSchema" => "UserSchema"],
                 "message" => "Message for user",
             ],
         ];
@@ -45,11 +45,11 @@ class ResponseSchemeTest extends TestCase
         deleteDocs();
 
         $responseSchema = [
-            "schema"      => "UserSchema",
+            "schema" => "UserSchema",
             "description" => "A User Object",
-            "define"      => [
+            "define" => [
                 "data" => [
-                    "name"  => "Full name of an User",
+                    "name" => "Full name of an User",
                     "email" => "Email of an User.",
                 ],
             ],

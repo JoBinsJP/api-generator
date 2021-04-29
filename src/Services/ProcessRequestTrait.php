@@ -22,7 +22,7 @@ trait ProcessRequestTrait
 
     private function parseRequestBody()
     {
-        if ( Arr::get($this->request, "rule") == null ) {
+        if (Arr::get($this->request, "rule") == null) {
             return null;
         }
 
@@ -36,9 +36,9 @@ trait ProcessRequestTrait
         return md5($this->request["rule"]);
     }
 
-    private function parseRequestBodies($requestBodies)
+    private function parseRequestBodies()
     {
-        if ( ($className = Arr::get($this->request, "rule")) == null ) {
+        if (($className = Arr::get($this->request, "rule")) == null) {
             return [];
         }
 
@@ -56,21 +56,19 @@ trait ProcessRequestTrait
         ];
     }
 
-
     public function getParseRequestBodiesData($request)
     {
-        $data           = [];
+        $data = [];
         $data["schema"] = [
-            "required"   => $this->getRequired($request),
+            "required" => $this->getRequired($request),
             "properties" => $this->getProperties($request),
         ];
 
-        if ( !$this->request["ignoreData"] ) {
+        if (! $this->request["ignoreData"]) {
             $data["example"] = $this->request["data"];
         }
 
         return $data;
-
     }
 
     private function getRequired($rules)
@@ -82,7 +80,7 @@ trait ProcessRequestTrait
 
     public function getProperties($data)
     {
-        return collect($data)->map(function ($value, $key) {
+        return collect($data)->map(function ($value) {
             return Arr::except($value, "required");
         })->toArray();
     }
@@ -92,16 +90,15 @@ trait ProcessRequestTrait
         $data = [];
 
         foreach ($rules as $name => $item) {
-
             $rulesArray = $item;
 
-            if ( !is_array($item) ) {
+            if (! is_array($item)) {
                 $rulesArray = explode("|", $item);
             }
 
             $data[$name] = [
-                "required"    => RequiredRule::check($rulesArray),
-                "type"        => in_array(["integer", "number"], $rulesArray) ? "integer" : "string",
+                "required" => RequiredRule::check($rulesArray),
+                "type" => in_array(["integer", "number"], $rulesArray) ? "integer" : "string",
                 "description" => Arr::get($description, $name, ""),
             ];
         };
@@ -111,7 +108,7 @@ trait ProcessRequestTrait
 
     public function getRules($class)
     {
-        if ( !method_exists($class, 'rules') ) {
+        if (! method_exists($class, 'rules')) {
             return [];
         }
 
@@ -120,11 +117,10 @@ trait ProcessRequestTrait
 
     public function getDescriptions($class)
     {
-        if ( !method_exists($class, 'descriptions') ) {
+        if (! method_exists($class, 'descriptions')) {
             return [];
         }
 
         return $class->descriptions();
     }
-
 }

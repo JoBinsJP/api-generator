@@ -72,4 +72,3 @@ class FormRequestTest extends TestCase
         $this->assertFileExists(config()->get("api-generator.file-path"));
     }
 }
-
