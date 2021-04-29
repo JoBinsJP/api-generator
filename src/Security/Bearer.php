@@ -12,8 +12,8 @@ class Bearer
     public function getSchema()
     {
         return [
-            "name"   => "barerToken",
-            "type"   => "http",
+            "name" => "barerToken",
+            "type" => "http",
             "scheme" => "bearer",
         ];
     }

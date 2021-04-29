@@ -10,7 +10,7 @@ trait HasSecurity
     {
         $securities = Arr::get($this->request, "security");
 
-        if ( empty($securities) ) {
+        if (empty($securities)) {
             return null;
         }
 
@@ -29,12 +29,12 @@ trait HasSecurity
     {
         $key = "components.securitySchemes.{$schema['name']}";
 
-        if ( data_get($this->data, $key) ) {
+        if (data_get($this->data, $key)) {
             return;
         };
 
         data_set($this->data, $key, [
-            "type"   => "http",
+            "type" => "http",
             "scheme" => "bearer",
         ]);
     }

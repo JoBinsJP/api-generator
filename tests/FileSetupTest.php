@@ -2,9 +2,9 @@
 
 namespace JoBins\APIGenerator\Tests;
 
+use Illuminate\Support\Facades\File;
 use JoBins\APIGenerator\Tests\Stubs\ExampleFormRequest;
 use JoBins\APIGenerator\Traits\HasDocsGenerator;
-use Illuminate\Support\Facades\File;
 
 /**
  * Class GeneratorTest

@@ -29,11 +29,11 @@ class RequiredRule
             return is_string($item);
         })->toArray();
 
-        if ( count(array_intersect(self::CONTAIN, $rules)) == 0 ) {
+        if (count(array_intersect(self::CONTAIN, $rules)) == 0) {
             return false;
         }
 
-        if ( count(array_intersect(self::NOT_CONTAIN, $rules)) > 0 ) {
+        if (count(array_intersect(self::NOT_CONTAIN, $rules)) > 0) {
             return false;
         }
 

@@ -27,7 +27,6 @@ class FormRequestInArray extends FormRequest
  */
 class EmailRule implements Rule
 {
-
     public function passes($attribute, $value)
     {
     }

@@ -8,5 +8,4 @@ namespace JoBins\APIGenerator;
  */
 class APIGeneratorFactory
 {
-
 }
