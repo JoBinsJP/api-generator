@@ -19,11 +19,11 @@ class RequiredRule
     const NOT_CONTAIN = ["sometimes", "nullable"];
 
     /**
-     * @param $rules
+     * @param array $rules
      *
      * @return bool
      */
-    public static function check($rules): bool
+    public static function check(array $rules): bool
     {
         $rules = collect($rules)->filter(function ($item) {
             return is_string($item);

@@ -4,6 +4,7 @@ namespace JoBins\APIGenerator\Services;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use JoBins\APIGenerator\Rules\RequiredRule;
 
 trait ProcessRequestTrait
@@ -11,16 +12,16 @@ trait ProcessRequestTrait
     /**
      * @var array
      */
-    protected $request;
+    protected array $request;
 
-    public function setRequest($request)
+    public function setRequest(array $request): self
     {
         $this->request = $request;
 
         return $this;
     }
 
-    private function parseRequestBody()
+    private function parseRequestBody(): ?array
     {
         if (Arr::get($this->request, "rule") == null) {
             return null;
@@ -31,12 +32,12 @@ trait ProcessRequestTrait
         ];
     }
 
-    public function getClassIdentifier()
+    public function getClassIdentifier(): string
     {
         return md5($this->request["rule"]);
     }
 
-    private function parseRequestBodies()
+    private function parseRequestBodies(): array
     {
         if (($className = Arr::get($this->request, "rule")) == null) {
             return [];
@@ -56,7 +57,7 @@ trait ProcessRequestTrait
         ];
     }
 
-    public function getParseRequestBodiesData($request)
+    public function getParseRequestBodiesData(array $request): array
     {
         $data = [];
         $data["schema"] = [
@@ -71,21 +72,21 @@ trait ProcessRequestTrait
         return $data;
     }
 
-    private function getRequired($rules)
+    private function getRequired(array $rules): Collection
     {
-        return collect($rules)->filter(function ($item) {
+        return collect($rules)->filter(function (array $item) {
             return $item["required"] == true;
         })->keys();
     }
 
-    public function getProperties($data)
+    public function getProperties(array $data): array
     {
-        return collect($data)->map(function ($value) {
+        return collect($data)->map(function (array $value) {
             return Arr::except($value, "required");
         })->toArray();
     }
 
-    private function processRequests($rules, array $description)
+    private function processRequests(array $rules, array $description): array
     {
         $data = [];
 
@@ -106,7 +107,7 @@ trait ProcessRequestTrait
         return $data;
     }
 
-    public function getRules($class)
+    public function getRules(object $class): array
     {
         if (! method_exists($class, 'rules')) {
             return [];
@@ -115,7 +116,7 @@ trait ProcessRequestTrait
         return $class->rules();
     }
 
-    public function getDescriptions($class)
+    public function getDescriptions(object $class): array
     {
         if (! method_exists($class, 'descriptions')) {
             return [];

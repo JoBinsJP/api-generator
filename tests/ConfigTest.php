@@ -21,6 +21,10 @@ class ConfigTest extends TestCase
 
         $json = getJsonFromDocs();
 
-        $this->assertEquals("http://api.localhost.test", Arr::get($json, "servers.0.url"));
+        $this->assertArrayHasKey("url", Arr::get($json, "servers.0"));
+        $this->assertArrayHasKey("variables", Arr::get($json, "servers.0"));
+
+        $this->assertEquals(config()->get("api-generator.servers.url"), Arr::get($json, "servers.0.url"));
+        $this->assertEquals(config()->get("api-generator.servers.variables"), Arr::get($json, "servers.0.variables"));
     }
 }
