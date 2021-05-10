@@ -59,7 +59,7 @@ class FormRequestRuleTest extends TestCase
     }
 
     /** @test */
-    public function the_form_request_descriptions_assocites_in_body()
+    public function the_form_request_descriptions_associated_in_body()
     {
         $path = config()->get("api-generator.file-path");
 

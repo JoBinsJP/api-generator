@@ -19,6 +19,11 @@ function getJsonFromDocs()
     return json_decode(file_get_contents($path), true);
 }
 
+/**
+ * @param $requestClass
+ *
+ * @return array|ArrayAccess|mixed
+ */
 function getRequestBodyScheme($requestClass)
 {
     $json = getJsonFromDocs();

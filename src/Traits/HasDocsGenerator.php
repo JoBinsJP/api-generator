@@ -6,6 +6,7 @@ use Illuminate\Testing\TestResponse;
 
 /**
  * Class HasDocsGenerator
+ *
  * @package JoBins\APIGenerator
  */
 trait HasDocsGenerator

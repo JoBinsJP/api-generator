@@ -2,12 +2,12 @@
 
 namespace JoBins\APIGenerator\Services;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use JoBins\APIGenerator\Security\HasParameter;
 use JoBins\APIGenerator\Security\HasResponse;
 use JoBins\APIGenerator\Security\HasSecurity;
+use JoBins\APIGenerator\Security\HasServer;
 
 /**
  * Class Generator
@@ -19,26 +19,23 @@ class Generator
     use HasParameter;
     use HasSecurity;
     use HasResponse;
+    use HasServer;
 
-    protected $data = [];
+    protected array $data = [];
 
-    /** @var JsonResponse */
-    protected $response;
+    /** @var */
+    protected $response = [];
 
-    protected $filePath;
+    protected string $filePath = "";
 
-    protected $url;
+    protected string $url = "";
 
     public function __construct()
     {
         $this->initializeFile();
 
         $this->data = array_merge($this->data, [
-            "servers" => [
-                [
-                    "url" => config()->get("api-generator.servers.url"),
-                ],
-            ],
+            "servers" => $this->processServer(config()->get("api-generator")),
             "openapi" => config()->get("api-generator.openapi"),
             "info" => [
                 "title" => config()->get("api-generator.title"),
@@ -50,7 +47,7 @@ class Generator
     /**
      * Create a new file if not exists and assign existing data to $data property.
      */
-    public function initializeFile()
+    public function initializeFile(): void
     {
         $this->filePath = config()->get("api-generator.file-path");
 
@@ -67,42 +64,21 @@ class Generator
         $this->data = json_decode(file_get_contents($this->filePath), true) ?? [];
     }
 
-    public function setResponse($response)
+    public function setResponse($response): self
     {
         $this->response = $response;
 
         return $this;
     }
 
-    public function generate()
+    public function generate(): void
     {
         $this->parseParam();
 
         File::put($this->filePath, json_encode($this->data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
     }
 
-    private function parseParam()
-    {
-        [$url, $parameters] = $this->preparePathWithParam();
-        $method = $this->request["method"];
-        $pathKey = "paths.{$url}.{$method}";
-
-        $pathData = Arr::get($this->data, $pathKey, []);
-        $pathData = $pathData + $this->getBasicPathInfo($pathData, $parameters);
-
-        data_set($this->data, $pathKey, $pathData);
-
-
-        $requestBodies = Arr::get($this->data, "components.requestBodies", []);
-
-        $requestBodies = $requestBodies + $this->parseRequestBodies();
-
-        if (! empty($requestBodies)) {
-            data_set($this->data, "components.requestBodies", $requestBodies);
-        }
-    }
-
-    public function getBasicPathInfo($pathData, $parameters)
+    public function getBasicPathInfo(array $pathData, $parameters): array
     {
         $responseData = Arr::get($pathData, "responses", []);
 
@@ -136,5 +112,25 @@ class Generator
         $data["responses"] = $this->parseResponse($responseData);
 
         return $data;
+    }
+
+    private function parseParam()
+    {
+        [$url, $parameters] = $this->preparePathWithParam();
+        $method = $this->request["method"];
+        $pathKey = "paths.{$url}.{$method}";
+
+        $pathData = Arr::get($this->data, $pathKey, []);
+        $pathData = $pathData + $this->getBasicPathInfo($pathData, $parameters);
+
+        data_set($this->data, $pathKey, $pathData);
+
+        $requestBodies = Arr::get($this->data, "components.requestBodies", []);
+
+        $requestBodies = $requestBodies + $this->parseRequestBodies();
+
+        if (! empty($requestBodies)) {
+            data_set($this->data, "components.requestBodies", $requestBodies);
+        }
     }
 }

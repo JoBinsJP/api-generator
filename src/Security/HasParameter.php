@@ -6,8 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 
+/**
+ * Trait HasParameter
+ *
+ * @package JoBins\APIGenerator\Security
+ */
 trait HasParameter
 {
+    /**
+     * @return array
+     */
     public function preparePathWithParam(): array
     {
         $url = Arr::get($this->request, "url");
@@ -23,6 +31,11 @@ trait HasParameter
         return ["/".$route->uri(), array_values($parameters)];
     }
 
+    /**
+     * @param array $queries
+     *
+     * @return array
+     */
     public function processQuery(array $queries): array
     {
         $definitions = Arr::get($this->request, "definitions");
@@ -34,7 +47,7 @@ trait HasParameter
                 "schema" => [
                     "type" => is_numeric($value) ? "integer" : "string",
                 ],
-                "description" => Arr::get($definitions, $param),
+                "description" => Arr::get($definitions, $param) ?? " ",
             ];
         })->toArray();
     }
@@ -56,7 +69,7 @@ trait HasParameter
                     "type" => is_numeric($value) ? "integer" : "string",
                 ],
                 "required" => true,
-                "description" => Arr::get($definitions, $param),
+                "description" => Arr::get($definitions, $param) ?? " ",
             ];
         })->toArray();
     }

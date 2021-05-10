@@ -6,7 +6,7 @@ use Illuminate\Support\Arr;
 
 trait HasSecurity
 {
-    public function processSecurity($request)
+    public function processSecurity($request): ?array
     {
         $securities = Arr::get($this->request, "security");
 
@@ -14,7 +14,7 @@ trait HasSecurity
             return null;
         }
 
-        return collect($securities)->map(function ($security) {
+        return collect($securities)->map(function (string $security) {
             $schema = (new $security)->getSchema();
 
             $this->ensureSecuritySchemaExists($schema);
@@ -25,7 +25,7 @@ trait HasSecurity
         })->toArray();
     }
 
-    public function ensureSecuritySchemaExists($schema)
+    public function ensureSecuritySchemaExists(array $schema): void
     {
         $key = "components.securitySchemes.{$schema['name']}";
 
