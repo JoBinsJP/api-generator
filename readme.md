@@ -34,9 +34,13 @@ php artisan vendor:publish --provider="Jobins\APIGenerator\APIGeneratorServicePr
 
 namespace Tests\Feature;
 
-use App\Http\Requests\RegistrationRequest::class;
+use App\Http\Requests\RegistrationRequest;
+use JoBins\APIGenerator\Security\Bearer;
+use JoBins\APIGenerator\Traits\HasDocsGenerator;
 
-class RegistrationTest extends TestCase{
+class RegistrationTest extends TestCase
+{
+    use HasDocsGenerator;
     
     /** @test */
     public function it_register_a_new_user()
@@ -51,14 +55,14 @@ class RegistrationTest extends TestCase{
         
         $this->setSummary("Register a new user.")
             ->setId("Register")
-            ->setSecurity([Security::BEARER])
+            ->setSecurity([Bearer::class])
             ->setTags(["Posts"])
             ->setRulesFromFormRequest(RegistrationRequest::class)
+            ->defineResponseSchema($responseSchema)
             ->jsond("post", route("registration.store"), $data)
             ->assertStatus(422)
             ->assertJsonFragment([])
             ->assertJsonStructure(["message"])
-            ->defineResponseSchema($responseSchema)
             ->generate($this, true);    
     }
 }
