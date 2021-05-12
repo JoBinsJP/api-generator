@@ -24,7 +24,10 @@
   "autoload": {
     "psr-4": {
       "JoBins\\APIGenerator\\": "src"
-    }
+    },
+    "files": [
+      "src/helper.php"
+    ]
   },
   "scripts": {
     "test": "vendor/bin/phpunit",

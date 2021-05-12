@@ -2,6 +2,8 @@
 
 namespace JoBins\APIGenerator\Tests;
 
+use Illuminate\Support\Arr;
+use JoBins\APIGenerator\Tests\Stubs\FormRequestImageArray;
 use JoBins\APIGenerator\Tests\Stubs\FormRequestInArray;
 use JoBins\APIGenerator\Tests\Stubs\NoDescriptionFormRequest;
 use JoBins\APIGenerator\Traits\HasDocsGenerator;
@@ -70,5 +72,30 @@ class FormRequestTest extends TestCase
             ->generate($this, true);
 
         $this->assertFileExists(config()->get("api-generator.file-path"));
+    }
+
+    /** @test */
+    public function it_supports_array_type_data_in_rules()
+    {
+        deleteDocs();
+
+        $this->setSummary("This is a example route")
+            ->setId("FormRequestImageArray")
+            ->setRulesFromFormRequest(FormRequestImageArray::class)
+            ->ignoreRequestDataAsExample()
+            ->jsond("post", route("posts.store"), [])
+            ->generate($this, true);
+
+        $this->assertFileExists(config()->get("api-generator.file-path"));
+
+        $schema = getRequestBodyScheme(FormRequestImageArray::class, "multipart/form-data");
+
+        $properties = Arr::get($schema, "schema.properties");
+
+        $this->assertEquals("array", Arr::get($properties, "images.type"));
+        $this->assertEquals(["type" => "string", "format" => "binary"], Arr::get($properties, "images.items"));
+
+        $this->assertEquals("array", Arr::get($properties, "keys.type"));
+        $this->assertEquals(["type" => "integer"], Arr::get($properties, "keys.items"));
     }
 }

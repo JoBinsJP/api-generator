@@ -4,6 +4,7 @@ namespace JoBins\APIGenerator\Services;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
+use JoBins\APIGenerator\Parser\RequestBodyComponent;
 use JoBins\APIGenerator\Security\HasParameter;
 use JoBins\APIGenerator\Security\HasResponse;
 use JoBins\APIGenerator\Security\HasSecurity;
@@ -127,7 +128,7 @@ class Generator
 
         $requestBodies = Arr::get($this->data, "components.requestBodies", []);
 
-        $requestBodies = $requestBodies + $this->parseRequestBodies();
+        $requestBodies = $requestBodies + (new RequestBodyComponent($this->request))->parseRequestBodies();
 
         if (! empty($requestBodies)) {
             data_set($this->data, "components.requestBodies", $requestBodies);

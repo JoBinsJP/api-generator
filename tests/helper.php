@@ -20,17 +20,18 @@ function getJsonFromDocs()
 }
 
 /**
- * @param $requestClass
+ * @param        $requestClass
+ * @param string $contentType
  *
  * @return array|ArrayAccess|mixed
  */
-function getRequestBodyScheme($requestClass)
+function getRequestBodyScheme($requestClass, string $contentType = "application/json")
 {
     $json = getJsonFromDocs();
 
     $requestId = md5($requestClass);
 
-    return Arr::get($json, "components.requestBodies.{$requestId}.content.application/json");
+    return Arr::get($json, "components.requestBodies.{$requestId}.content.{$contentType}");
 }
 
 function getSchema(string $name)
