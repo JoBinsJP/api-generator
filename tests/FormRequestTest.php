@@ -10,8 +10,6 @@ use JoBins\APIGenerator\Traits\HasDocsGenerator;
 
 /**
  * Class FormRequestTest
- *
- * @package JoBins\APIGenerator\Tests
  */
 class FormRequestTest extends TestCase
 {
@@ -22,12 +20,12 @@ class FormRequestTest extends TestCase
     {
         deleteDocs();
 
-        $this->setSummary("This is a example route")
-            ->setId("ExampleRoute")
-            ->jsond("post", route("posts.store"), [])
+        $this->setSummary('This is a example route')
+            ->setId('ExampleRoute')
+            ->jsond('post', route('posts.store'), [])
             ->generate($this, true);
 
-        $this->assertFileExists(config()->get("api-generator.file-path"));
+        $this->assertFileExists(config()->get('api-generator.file-path'));
     }
 
     /** @test */
@@ -35,13 +33,13 @@ class FormRequestTest extends TestCase
     {
         deleteDocs();
 
-        $this->setSummary("This is a example route")
-            ->setId("ExampleRoute")
+        $this->setSummary('This is a example route')
+            ->setId('ExampleRoute')
             ->setRulesFromFormRequest(NoDescriptionFormRequest::class)
-            ->jsond("post", route("posts.store"), [])
+            ->jsond('post', route('posts.store'), [])
             ->generate($this, true);
 
-        $this->assertFileExists(config()->get("api-generator.file-path"));
+        $this->assertFileExists(config()->get('api-generator.file-path'));
     }
 
     /** @test */
@@ -49,14 +47,14 @@ class FormRequestTest extends TestCase
     {
         deleteDocs();
 
-        $this->setSummary("This is a example route")
-            ->setId("ExampleRoute")
+        $this->setSummary('This is a example route')
+            ->setId('ExampleRoute')
             ->setRulesFromFormRequest(NoDescriptionFormRequest::class)
             ->ignoreRequestDataAsExample()
-            ->jsond("post", route("posts.store"), [])
+            ->jsond('post', route('posts.store'), [])
             ->generate($this, true);
 
-        $this->assertFileExists(config()->get("api-generator.file-path"));
+        $this->assertFileExists(config()->get('api-generator.file-path'));
     }
 
     /** @test */
@@ -64,14 +62,14 @@ class FormRequestTest extends TestCase
     {
         deleteDocs();
 
-        $this->setSummary("This is a example route")
-            ->setId("FormRequestInArray")
+        $this->setSummary('This is a example route')
+            ->setId('FormRequestInArray')
             ->setRulesFromFormRequest(FormRequestInArray::class)
             ->ignoreRequestDataAsExample()
-            ->jsond("post", route("posts.store"), [])
+            ->jsond('post', route('posts.store'), [])
             ->generate($this, true);
 
-        $this->assertFileExists(config()->get("api-generator.file-path"));
+        $this->assertFileExists(config()->get('api-generator.file-path'));
     }
 
     /** @test */
@@ -79,23 +77,23 @@ class FormRequestTest extends TestCase
     {
         deleteDocs();
 
-        $this->setSummary("This is a example route")
-            ->setId("FormRequestImageArray")
+        $this->setSummary('This is a example route')
+            ->setId('FormRequestImageArray')
             ->setRulesFromFormRequest(FormRequestImageArray::class)
             ->ignoreRequestDataAsExample()
-            ->jsond("post", route("posts.store"), [])
+            ->jsond('post', route('posts.store'), [])
             ->generate($this, true);
 
-        $this->assertFileExists(config()->get("api-generator.file-path"));
+        $this->assertFileExists(config()->get('api-generator.file-path'));
 
-        $schema = getRequestBodyScheme(FormRequestImageArray::class, "multipart/form-data");
+        $schema = getRequestBodyScheme(FormRequestImageArray::class, 'multipart/form-data');
 
-        $properties = Arr::get($schema, "schema.properties");
+        $properties = Arr::get($schema, 'schema.properties');
 
-        $this->assertEquals("array", Arr::get($properties, "images.type"));
-        $this->assertEquals(["type" => "string", "format" => "binary"], Arr::get($properties, "images.items"));
+        $this->assertEquals('array', Arr::get($properties, 'images.type'));
+        $this->assertEquals(['type' => 'string', 'format' => 'binary'], Arr::get($properties, 'images.items'));
 
-        $this->assertEquals("array", Arr::get($properties, "keys.type"));
-        $this->assertEquals(["type" => "integer"], Arr::get($properties, "keys.items"));
+        $this->assertEquals('array', Arr::get($properties, 'keys.type'));
+        $this->assertEquals(['type' => 'integer'], Arr::get($properties, 'keys.items'));
     }
 }

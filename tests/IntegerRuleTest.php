@@ -1,6 +1,5 @@
 <?php
 
-
 use JoBins\APIGenerator\Rules\IntegerRule;
 use JoBins\APIGenerator\Tests\TestCase;
 
@@ -16,7 +15,7 @@ class IntegerRuleTest extends TestCase
      */
     public function it_validates_file($rules, $expected)
     {
-        $this->assertEquals($expected, (new IntegerRule())->check($rules));
+        $this->assertEquals($expected, (new IntegerRule)->check($rules));
     }
 
     public function integerRuleDataProvider(): array

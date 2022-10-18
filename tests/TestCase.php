@@ -11,15 +11,13 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 
 /**
  * Class TestCase
- * @package JoBins\APIGenerator
  */
 class TestCase extends BaseTestCase
 {
     /**
      * Get package providers.
      *
-     * @param Application $app
-     *
+     * @param  Application  $app
      * @return array
      */
     protected function getPackageProviders($app)
@@ -34,15 +32,14 @@ class TestCase extends BaseTestCase
     /**
      * Define routes setup.
      *
-     * @param Router $router
-     *
+     * @param  Router  $router
      * @return void
      */
     protected function defineRoutes($router)
     {
-        $router->get("/api/users", [UsersController::class, "index"])->name("users.index");
-        $router->get("/api/users/{id}", [UsersController::class, "show"])->name("users.show");
-        $router->delete("/api/users/{id}", [UsersController::class, "destroy"])->name("users.destroy");
-        $router->post("/api/posts", [ExampleController::class, "index"])->name("posts.store");
+        $router->get('/api/users', [UsersController::class, 'index'])->name('users.index');
+        $router->get('/api/users/{id}', [UsersController::class, 'show'])->name('users.show');
+        $router->delete('/api/users/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+        $router->post('/api/posts', [ExampleController::class, 'index'])->name('posts.store');
     }
 }

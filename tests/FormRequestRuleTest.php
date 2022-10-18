@@ -8,7 +8,6 @@ use JoBins\APIGenerator\Traits\HasDocsGenerator;
 
 /**
  * Class FormRequestRuleTest
- * @package JoBins\APIGenerator\Tests
  */
 class FormRequestRuleTest extends TestCase
 {
@@ -19,16 +18,16 @@ class FormRequestRuleTest extends TestCase
     {
         deleteDocs();
 
-        $this->setSummary("This is a example route")
-            ->setId("ExampleRoute")
-            ->jsond("post", route("posts.store"), [])
+        $this->setSummary('This is a example route')
+            ->setId('ExampleRoute')
+            ->jsond('post', route('posts.store'), [])
             ->generate($this, true);
 
-        $this->assertFileExists(config()->get("api-generator.file-path"));
+        $this->assertFileExists(config()->get('api-generator.file-path'));
 
         $json = getJsonFromDocs();
 
-        $this->assertNull(Arr::get($json, "paths./api/posts.post.requestBody"));
+        $this->assertNull(Arr::get($json, 'paths./api/posts.post.requestBody'));
     }
 
     /**
@@ -40,17 +39,17 @@ class FormRequestRuleTest extends TestCase
     {
         deleteDocs();
 
-        $this->setSummary("This is a example route")
-            ->setId("ExampleRoute")
+        $this->setSummary('This is a example route')
+            ->setId('ExampleRoute')
             ->setRulesFromFormRequest(RuleExampleFormRequest::class)
-            ->jsond("post", route("posts.store"), [])
+            ->jsond('post', route('posts.store'), [])
             ->generate($this, true);
 
-        $this->assertFileExists(config()->get("api-generator.file-path"));
+        $this->assertFileExists(config()->get('api-generator.file-path'));
 
         $schema = getRequestBodyScheme(RuleExampleFormRequest::class);
 
-        $this->assertEquals($required, Arr::get($schema, "schema.required"));
+        $this->assertEquals($required, Arr::get($schema, 'schema.required'));
     }
 
     /** @test */
@@ -58,18 +57,18 @@ class FormRequestRuleTest extends TestCase
     {
         deleteDocs();
 
-        $this->setSummary("This is a example route")
-            ->setId("ExampleRoute")
+        $this->setSummary('This is a example route')
+            ->setId('ExampleRoute')
             ->setRulesFromFormRequest(RuleExampleFormRequest::class)
-            ->jsond("post", route("posts.store"), [])
+            ->jsond('post', route('posts.store'), [])
             ->generate($this, true);
 
         $schema = getRequestBodyScheme(RuleExampleFormRequest::class);
 
-        $properties = Arr::get($schema, "schema.properties");
+        $properties = Arr::get($schema, 'schema.properties');
 
         foreach ($properties as $key => $property) {
-            $expected = Arr::get((new RuleExampleFormRequest())->descriptions(), $key);
+            $expected = Arr::get((new RuleExampleFormRequest)->descriptions(), $key);
 
             $this->assertEquals($expected, $property['description'] ?? null);
         }
@@ -78,7 +77,7 @@ class FormRequestRuleTest extends TestCase
     public function requiredRuleDataProvider()
     {
         return [
-            [RuleExampleFormRequest::class, ["name"]],
+            [RuleExampleFormRequest::class, ['name']],
         ];
     }
 }

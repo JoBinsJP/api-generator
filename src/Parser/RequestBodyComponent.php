@@ -10,8 +10,6 @@ use JoBins\APIGenerator\Rules\RequiredRule;
 
 /**
  * Class HasRequestBodies
- *
- * @package JoBins\APIGenerator\Security
  */
 class RequestBodyComponent
 {
@@ -25,12 +23,12 @@ class RequestBodyComponent
     /**
      * @var string
      */
-    protected string $contentType = "application/json";
+    protected string $contentType = 'application/json';
 
     /**
      * ParseRequestBody constructor.
      *
-     * @param array $request
+     * @param  array  $request
      */
     public function __construct(array $request)
     {
@@ -45,7 +43,7 @@ class RequestBodyComponent
 
         return collect($class->rules())->map(function ($item) {
             if (! is_array($item)) {
-                return explode("|", $item);
+                return explode('|', $item);
             }
 
             return $item;
@@ -64,14 +62,14 @@ class RequestBodyComponent
     public function getParseSchema(array $request): array
     {
         $data = [];
-        $data["schema"] = [
-            "type" => "object",
-            "required" => $this->getRequired($request),
-            "properties" => $this->getProperties($request),
+        $data['schema'] = [
+            'type' => 'object',
+            'required' => $this->getRequired($request),
+            'properties' => $this->getProperties($request),
         ];
 
-        if (! $this->request["ignoreData"]) {
-            $data["example"] = $this->request["data"];
+        if (! $this->request['ignoreData']) {
+            $data['example'] = $this->request['data'];
         }
 
         return $data;
@@ -79,7 +77,7 @@ class RequestBodyComponent
 
     public function parseRequestBodies(): array
     {
-        if (($className = Arr::get($this->request, "rule")) == null) {
+        if (($className = Arr::get($this->request, 'rule')) == null) {
             return [];
         }
 
@@ -94,7 +92,7 @@ class RequestBodyComponent
 
         return [
             getClassIdentifier($className) => [
-                "content" => [
+                'content' => [
                     $this->contentType => $this->getParseSchema($data),
                 ],
             ],
@@ -114,12 +112,12 @@ class RequestBodyComponent
 
             $data[$name] = $this->getPropertyType($item, $name);
 
-            $data[$name]["required"] = RequiredRule::check($item);
+            $data[$name]['required'] = RequiredRule::check($item);
 
             if ($descriptionText = Arr::get($descriptions, $name)) {
-                $data[$name]["description"] = $descriptionText;
+                $data[$name]['description'] = $descriptionText;
             }
-        };
+        }
 
         return $data;
     }
@@ -127,14 +125,14 @@ class RequestBodyComponent
     private function getRequired(array $rules): Collection
     {
         return collect($rules)->filter(function (array $item) {
-            return $item["required"] == true;
+            return $item['required'] == true;
         })->keys();
     }
 
     private function getProperties(array $data): array
     {
         return collect($data)->map(function (array $value) {
-            return Arr::except($value, "required");
+            return Arr::except($value, 'required');
         })->toArray();
     }
 }

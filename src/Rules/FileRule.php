@@ -9,16 +9,15 @@ class FileRule implements RuleContract
     /**
      * Rules that is required to be File.
      */
-    const CONTAIN = ["image"];
+    const CONTAIN = ['image'];
 
     /**
      * string that should be included to be a File.
      */
-    const STR_INCLUDES = ["mimes", "mimetypes", "dimensions"];
+    const STR_INCLUDES = ['mimes', 'mimetypes', 'dimensions'];
 
     /**
-     * @param array $rules
-     *
+     * @param  array  $rules
      * @return bool
      */
     public static function check(array $rules): bool

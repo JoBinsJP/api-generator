@@ -1,59 +1,59 @@
 {
-  "name": "jobins/api-generator",
-  "description": "Generate api docs while writing test case (Laravel).",
-  "keywords": [
-    "JoBins",
-    "documentation",
-    "api",
-    "swagger",
-    "openapi",
-    "phpunit"
-  ],
-  "homepage": "https://github.com/JoBinsJP/api-genereator",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Bedram Tamang",
-      "email": "tmgbedu@gmail.com"
-    }
-  ],
-  "require": {
-    "php":      "^7.4|^8.0|^8.1",
-    "ext-json": "*"
-  },
-  "autoload": {
-    "psr-4": {
-      "JoBins\\APIGenerator\\": "src"
+    "name": "jobins/api-generator",
+    "description": "Generate api docs while writing test case (Laravel).",
+    "keywords": [
+        "JoBins",
+        "documentation",
+        "api",
+        "swagger",
+        "openapi",
+        "phpunit"
+    ],
+    "homepage": "https://github.com/JoBinsJP/api-genereator",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bedram Tamang",
+            "email": "tmgbedu@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0|^8.1",
+        "ext-json": "*"
     },
-    "files": [
-      "src/helper.php"
-    ]
-  },
-  "scripts": {
-    "test": "vendor/bin/phpunit",
-    "psalm": "vendor/bin/psalm",
-    "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
-    "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "JoBins\\APIGenerator\\Tests\\": "tests"
+    "autoload": {
+        "psr-4": {
+            "JoBins\\APIGenerator\\": "src"
+        },
+        "files": [
+            "src/helper.php"
+        ]
     },
-    "files": [
-      "tests/helper.php"
-    ]
-  },
-  "require-dev": {
-    "orchestra/testbench": "^6.15",
-    "phpunit/phpunit": "^9.0",
-    "friendsofphp/php-cs-fixer": "^2.18",
-    "vimeo/psalm": "^4.7"
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "JoBins\\APIGenerator\\APIGeneratorServiceProvider"
-      ]
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "psalm": "vendor/bin/psalm",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "format": "vendor/bin/pint"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JoBins\\APIGenerator\\Tests\\": "tests"
+        },
+        "files": [
+            "tests/helper.php"
+        ]
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.15",
+        "phpunit/phpunit": "^9.0",
+        "vimeo/psalm": "^4.7",
+        "laravel/pint": "^1.2"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JoBins\\APIGenerator\\APIGeneratorServiceProvider"
+            ]
+        }
     }
-  }
 }

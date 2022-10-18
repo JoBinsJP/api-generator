@@ -6,8 +6,6 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class UsersController
- *
- * @package JoBins\APIGenerator\Tests\Stubs
  */
 class UsersController
 {
@@ -18,10 +16,10 @@ class UsersController
     {
         return response()->json(
             [
-                "message" => "List of Users",
-                "data" => [
-                    ["id" => 1, "name" => "Vedas Bomjon", "email" => "bedram@jobins.jp"],
-                    ["id" => 2, "name" => "Puncoz", "email" => "puncoz@jobins.jp"],
+                'message' => 'List of Users',
+                'data' => [
+                    ['id' => 1, 'name' => 'Vedas Bomjon', 'email' => 'bedram@jobins.jp'],
+                    ['id' => 2, 'name' => 'Puncoz', 'email' => 'puncoz@jobins.jp'],
                 ],
             ]
         );
@@ -31,14 +29,14 @@ class UsersController
     {
         return response()->json(
             [
-                "message" => "Detail of a User.",
-                "data" => [
-                    "id" => 1,
-                    "name" => "Vedas Bomjon",
-                    "email" => "bedram@jobins.jp",
-                    "company" => [
-                        "name" => "JoBins Inc.",
-                        "country" => "Japan",
+                'message' => 'Detail of a User.',
+                'data' => [
+                    'id' => 1,
+                    'name' => 'Vedas Bomjon',
+                    'email' => 'bedram@jobins.jp',
+                    'company' => [
+                        'name' => 'JoBins Inc.',
+                        'country' => 'Japan',
                     ],
                 ],
             ]

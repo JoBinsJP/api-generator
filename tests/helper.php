@@ -7,25 +7,24 @@ use Illuminate\Support\Facades\Route;
 
 function deleteDocs()
 {
-    $path = config()->get("api-generator.file-path");
+    $path = config()->get('api-generator.file-path');
 
     File::delete($path);
 }
 
 function getJsonFromDocs()
 {
-    $path = config()->get("api-generator.file-path");
+    $path = config()->get('api-generator.file-path');
 
     return json_decode(file_get_contents($path), true);
 }
 
 /**
- * @param        $requestClass
- * @param string $contentType
- *
+ * @param    $requestClass
+ * @param  string  $contentType
  * @return array|ArrayAccess|mixed
  */
-function getRequestBodyScheme($requestClass, string $contentType = "application/json")
+function getRequestBodyScheme($requestClass, string $contentType = 'application/json')
 {
     $json = getJsonFromDocs();
 
@@ -41,7 +40,7 @@ function getSchema(string $name)
     return Arr::get($json, "components.schemas.{$name}");
 }
 
-function getJsonForEndpoint(string $endpoint, $method = "get")
+function getJsonForEndpoint(string $endpoint, $method = 'get')
 {
     $json = getJsonFromDocs();
 

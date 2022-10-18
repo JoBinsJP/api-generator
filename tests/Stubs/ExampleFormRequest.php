@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class ExampleFormRequest
- * @package JoBins\APIGenerator\Tests\Stubs
  */
 class ExampleFormRequest extends FormRequest
 {

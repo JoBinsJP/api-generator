@@ -34,7 +34,7 @@ class APIGeneratorServiceProvider extends ServiceProvider
             __DIR__.'/../config/api-generator.php' => config_path('api-generator.php'),
         ]);
 
-        TestResponse::macro("generate", function ($testCase, bool $generate = true) {
+        TestResponse::macro('generate', function ($testCase, bool $generate = true) {
             if (! $generate) {
                 return;
             }
@@ -42,7 +42,7 @@ class APIGeneratorServiceProvider extends ServiceProvider
             /** @var JsonResponse $response */
             $response = $this;
 
-            (new Generator())->setRequest($testCase->getParams())->setResponse($response)->generate();
+            (new Generator)->setRequest($testCase->getParams())->setResponse($response)->generate();
         });
     }
 }

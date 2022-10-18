@@ -17,15 +17,15 @@ class SecuritySchemaTest extends TestCase
     {
         deleteDocs();
 
-        $this->setSummary("User list API.")
-            ->setId("Register")
+        $this->setSummary('User list API.')
+            ->setId('Register')
             ->setSecurity([Bearer::class])
-            ->jsond("get", route("users.index"))
+            ->jsond('get', route('users.index'))
             ->assertStatus(200)
             ->generate($this, true);
 
-        $json = getJsonForEndpoint(route("users.index"));
+        $json = getJsonForEndpoint(route('users.index'));
 
-        $this->assertCount(1, Arr::get($json, "security"));
+        $this->assertCount(1, Arr::get($json, 'security'));
     }
 }

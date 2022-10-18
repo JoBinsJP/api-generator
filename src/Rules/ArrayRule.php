@@ -4,19 +4,16 @@ namespace JoBins\APIGenerator\Rules;
 
 /**
  * Class ArrayRule
- *
- * @package JoBins\APIGenerator\Rules
  */
 class ArrayRule implements RuleContract
 {
     /**
      * Rules that is valid for required.
      */
-    const CONTAIN = ["array"];
+    const CONTAIN = ['array'];
 
     /**
-     * @param array $rules
-     *
+     * @param  array  $rules
      * @return bool
      */
     public static function check(array $rules): bool

@@ -9,16 +9,16 @@ class RuleExampleFormRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required",
-            "full_name" => "sometimes|required",
-            "last_name" => "nullable|required",
+            'name' => 'required',
+            'full_name' => 'sometimes|required',
+            'last_name' => 'nullable|required',
         ];
     }
 
     public function descriptions()
     {
         return [
-            "name" => "Full name of a user",
+            'name' => 'Full name of a user',
         ];
     }
 }

@@ -14,14 +14,14 @@ class TagsTest extends TestCase
     {
         deleteDocs();
 
-        $this->setSummary("This is a example route")
-            ->setId("ExampleRoute")
-            ->setTags(["Posts"])
-            ->jsond("post", route("posts.store"), [])
+        $this->setSummary('This is a example route')
+            ->setId('ExampleRoute')
+            ->setTags(['Posts'])
+            ->jsond('post', route('posts.store'), [])
             ->generate($this, true);
 
-        $json = getJsonForEndpoint(route("posts.store"), "post");
+        $json = getJsonForEndpoint(route('posts.store'), 'post');
 
-        $this->assertEquals(["Posts"], Arr::get($json, "tags"));
+        $this->assertEquals(['Posts'], Arr::get($json, 'tags'));
     }
 }

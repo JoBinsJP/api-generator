@@ -14,24 +14,24 @@ class PathTest extends TestCase
     {
         deleteDocs();
 
-        $this->setSummary("User list API.")
-            ->setId("Register")
+        $this->setSummary('User list API.')
+            ->setId('Register')
             ->defineParameters([
-                "id" => "Numeric ID of user to get details",
+                'id' => 'Numeric ID of user to get details',
             ])
-            ->jsond("get", route("users.show", 1))
+            ->jsond('get', route('users.show', 1))
             ->generate($this, true);
 
-        $this->setSummary("User list API.")
-            ->setId("Register")
+        $this->setSummary('User list API.')
+            ->setId('Register')
             ->defineParameters([
-                "id" => "Numeric ID of the user to delete",
+                'id' => 'Numeric ID of the user to delete',
             ])
-            ->jsond("delete", route("users.show", 1), [])
+            ->jsond('delete', route('users.show', 1), [])
             ->generate($this, true);
 
-        $this->assertNotNull(getJsonForEndpoint(route("users.show", 1), "get"));
-        $this->assertNotNull(getJsonForEndpoint(route("users.destroy", 1), "delete"));
+        $this->assertNotNull(getJsonForEndpoint(route('users.show', 1), 'get'));
+        $this->assertNotNull(getJsonForEndpoint(route('users.destroy', 1), 'delete'));
     }
 
     /** @test */
@@ -39,23 +39,23 @@ class PathTest extends TestCase
     {
         deleteDocs();
 
-        $this->setSummary("User list API.")
-            ->setId("Register")
+        $this->setSummary('User list API.')
+            ->setId('Register')
             ->defineParameters([
-                "id" => "Numeric ID of user to get details",
+                'id' => 'Numeric ID of user to get details',
             ])
-            ->jsond("get", route("users.show", 1))
+            ->jsond('get', route('users.show', 1))
             ->generate($this, true);
 
         // Second operation should not override the first operation.
-        $this->jsond("get", route("users.show", 1))
+        $this->jsond('get', route('users.show', 1))
             ->generate($this, true);
 
-        $json = getJsonForEndpoint(route("users.show", 1));
+        $json = getJsonForEndpoint(route('users.show', 1));
 
-        $this->assertEquals("User list API.", Arr::get($json, "summary"));
-        $this->assertEquals("Register", Arr::get($json, "operationId"));
+        $this->assertEquals('User list API.', Arr::get($json, 'summary'));
+        $this->assertEquals('Register', Arr::get($json, 'operationId'));
 
-        $this->assertEquals("Numeric ID of user to get details", Arr::get($json, "parameters.0.description"));
+        $this->assertEquals('Numeric ID of user to get details', Arr::get($json, 'parameters.0.description'));
     }
 }

@@ -4,8 +4,6 @@ namespace JoBins\APIGenerator\Contract;
 
 /**
  * Interface Description
- *
- * @package JoBins\APIGenerator\Contract
  */
 interface Description
 {

@@ -8,7 +8,6 @@ use JoBins\APIGenerator\Traits\HasDocsGenerator;
 
 /**
  * Class GeneratorTest
- * @package JoBins\APIGenerator\Tests
  */
 class FileSetupTest extends TestCase
 {
@@ -17,14 +16,14 @@ class FileSetupTest extends TestCase
     /** @test */
     public function it_generates_api_docs_if_file_does_not_exists()
     {
-        $path = config()->get("api-generator.file-path");
+        $path = config()->get('api-generator.file-path');
 
         File::delete($path);
 
-        $this->setSummary("This is a example route")
-            ->setId("ExampleRoute")
+        $this->setSummary('This is a example route')
+            ->setId('ExampleRoute')
             ->setRulesFromFormRequest(ExampleFormRequest::class)
-            ->jsond("post", route("posts.store"), [])
+            ->jsond('post', route('posts.store'), [])
             ->generate($this, true);
 
         $this->assertFileExists($path);
@@ -33,16 +32,16 @@ class FileSetupTest extends TestCase
     /** @test */
     public function it_generates_api_docs_if_directory_does_not_exists()
     {
-        $path = config()->get("api-generator.file-path");
+        $path = config()->get('api-generator.file-path');
 
-        $directory = pathinfo($path)["dirname"];
+        $directory = pathinfo($path)['dirname'];
 
         File::deleteDirectory($directory);
 
-        $this->setSummary("This is a example route")
-            ->setId("ExampleRoute")
+        $this->setSummary('This is a example route')
+            ->setId('ExampleRoute')
             ->setRulesFromFormRequest(ExampleFormRequest::class)
-            ->jsond("post", route("posts.store"), [])
+            ->jsond('post', route('posts.store'), [])
             ->generate($this, true);
 
         $this->assertFileExists($path);
