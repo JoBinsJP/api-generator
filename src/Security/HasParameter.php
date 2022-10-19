@@ -16,7 +16,7 @@ trait HasParameter
      */
     public function preparePathWithParam(): array
     {
-        $url = Arr::get($this->request, 'url');
+        $url    = Arr::get($this->request, 'url');
         $method = Arr::get($this->request, 'method');
 
         $route = Route::getRoutes()->match(Request::create($url, $method));
@@ -39,8 +39,8 @@ trait HasParameter
 
         return collect($queries)->map(function ($value, $param) use ($definitions) {
             return [
-                'in' => 'query',
-                'name' => $param,
+                'in'     => 'query',
+                'name'   => $param,
                 'schema' => [
                     'type' => is_numeric($value) ? 'integer' : 'string',
                 ],
@@ -59,12 +59,12 @@ trait HasParameter
 
         return collect($parameters)->map(function ($value, $param) use ($definitions) {
             return [
-                'in' => 'path',
-                'name' => $param,
+                'in'     => 'path',
+                'name'   => $param,
                 'schema' => [
                     'type' => is_numeric($value) ? 'integer' : 'string',
                 ],
-                'required' => true,
+                'required'    => true,
                 'description' => Arr::get($definitions, $param) ?? ' ',
             ];
         })->toArray();

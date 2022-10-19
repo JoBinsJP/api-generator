@@ -41,12 +41,14 @@ class RequestBodyComponent
             return [];
         }
 
-        return collect($class->rules())->map(function ($item) {
-            if (! is_array($item)) {
-                return explode('|', $item);
+        return collect($class->rules())->map(function ($rules) {
+            if (! is_array($rules)) {
+                return explode('|', $rules);
             }
 
-            return $item;
+            return collect($rules)->filter(function ($item) {
+                return is_string($item);
+            });
         })->toArray();
     }
 
@@ -61,10 +63,10 @@ class RequestBodyComponent
 
     public function getParseSchema(array $request): array
     {
-        $data = [];
+        $data           = [];
         $data['schema'] = [
-            'type' => 'object',
-            'required' => $this->getRequired($request),
+            'type'       => 'object',
+            'required'   => $this->getRequired($request),
             'properties' => $this->getProperties($request),
         ];
 
@@ -82,7 +84,7 @@ class RequestBodyComponent
         }
 
         /** @var FormRequest $class */
-        $class = (new $className);
+        $class = new $className;
 
         // Set rules of a class for global access.
         $rules = $this->getRules($class);

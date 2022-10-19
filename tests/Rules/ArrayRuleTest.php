@@ -1,8 +1,9 @@
 <?php
 
-namespace JoBins\APIGenerator\Tests;
+namespace JoBins\APIGenerator\Tests\Rules;
 
 use JoBins\APIGenerator\Rules\ArrayRule;
+use JoBins\APIGenerator\Tests\TestCase;
 
 class ArrayRuleTest extends TestCase
 {

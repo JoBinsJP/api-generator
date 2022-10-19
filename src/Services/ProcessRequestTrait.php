@@ -24,9 +24,9 @@ trait ProcessRequestTrait
 
     private function parseRequestBody(): ?array
     {
-        $requestClass = app($this->request);
+        $className = Arr::get($this->request, 'rule');
 
-        if (! ($className = Arr::get($this->request, 'rule'))) {
+        if (empty($className)) {
             return null;
         }
 

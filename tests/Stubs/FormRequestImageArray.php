@@ -13,11 +13,11 @@ class FormRequestImageArray extends FormRequest implements Description
     public function rules()
     {
         return [
-            'profile' => 'required|image',
-            'images' => 'nullable|sometimes|array|min:1|max:10',
+            'profile'  => 'required|image',
+            'images'   => 'nullable|sometimes|array|min:1|max:10',
             'images.*' => 'image',
-            'keys' => 'array',
-            'keys.*' => 'integer',
+            'keys'     => 'array',
+            'keys.*'   => 'integer',
         ];
     }
 
@@ -25,8 +25,8 @@ class FormRequestImageArray extends FormRequest implements Description
     {
         return [
             'profiles' => 'Profiles',
-            'images' => 'Images only',
-            'keys.*' => 'Asterik',
+            'images'   => 'Images only',
+            'keys.*'   => 'Asterik',
         ];
     }
 }

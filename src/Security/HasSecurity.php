@@ -34,7 +34,7 @@ trait HasSecurity
         }
 
         data_set($this->data, $key, [
-            'type' => 'http',
+            'type'   => 'http',
             'scheme' => 'bearer',
         ]);
     }

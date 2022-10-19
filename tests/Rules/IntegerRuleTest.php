@@ -1,5 +1,7 @@
 <?php
 
+namespace JoBins\APIGenerator\Tests\Rules;
+
 use JoBins\APIGenerator\Rules\IntegerRule;
 use JoBins\APIGenerator\Tests\TestCase;
 

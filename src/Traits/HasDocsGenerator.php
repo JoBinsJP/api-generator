@@ -175,17 +175,17 @@ trait HasDocsGenerator
     public function getParams(): array
     {
         return [
-            'security' => $this->d_security,
-            'operationID' => $this->d_operationId,
-            'summary' => $this->d_summary,
-            'tags' => $this->d_tags,
-            'rule' => $this->d_request,
-            'data' => $this->d_data,
-            'header' => $this->d_header,
-            'definitions' => $this->d_definitions,
-            'url' => $this->d_url,
-            'method' => $this->d_method,
-            'ignoreData' => $this->d_ignore_request_data,
+            'security'       => $this->d_security,
+            'operationID'    => $this->d_operationId,
+            'summary'        => $this->d_summary,
+            'tags'           => $this->d_tags,
+            'rule'           => $this->d_request,
+            'data'           => $this->d_data,
+            'header'         => $this->d_header,
+            'definitions'    => $this->d_definitions,
+            'url'            => $this->d_url,
+            'method'         => $this->d_method,
+            'ignoreData'     => $this->d_ignore_request_data,
             'responseSchema' => $this->d_response_schema,
         ];
     }

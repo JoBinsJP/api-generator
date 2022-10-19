@@ -27,9 +27,6 @@ class FileRule implements RuleContract
                 $rule = (string) $rule;
             }
 
-            if (! is_string($rule)) {
-                continue;
-            }
             if (in_array($rule, self::CONTAIN)) {
                 return true;
             }

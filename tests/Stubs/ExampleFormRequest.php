@@ -11,7 +11,9 @@ class ExampleFormRequest extends FormRequest
 {
     public function rules()
     {
-        return [];
+        return [
+            'category' => 'required|in:football,cricket',
+        ];
     }
 
     public function descriptions()

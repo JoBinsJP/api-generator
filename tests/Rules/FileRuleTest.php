@@ -1,9 +1,10 @@
 <?php
 
-namespace JoBins\APIGenerator\Tests;
+namespace JoBins\APIGenerator\Tests\Rules;
 
 use Illuminate\Validation\Rule;
 use JoBins\APIGenerator\Rules\FileRule;
+use JoBins\APIGenerator\Tests\TestCase;
 
 /**
  * Class FileRuleTest

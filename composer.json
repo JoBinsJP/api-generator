@@ -32,8 +32,8 @@
     "scripts": {
         "test": "vendor/bin/phpunit",
         "psalm": "vendor/bin/psalm",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
-        "format": "vendor/bin/pint"
+        "pint": "vendor/bin/pint",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },
     "autoload-dev": {
         "psr-4": {
@@ -46,8 +46,7 @@
     "require-dev": {
         "orchestra/testbench": "^6.15",
         "phpunit/phpunit": "^9.0",
-        "vimeo/psalm": "^4.7",
-        "laravel/pint": "^1.2"
+        "vimeo/psalm": "^4.7"
     },
     "extra": {
         "laravel": {

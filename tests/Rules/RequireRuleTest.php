@@ -1,8 +1,9 @@
 <?php
 
-namespace JoBins\APIGenerator\Tests;
+namespace JoBins\APIGenerator\Tests\Rules;
 
 use JoBins\APIGenerator\Rules\RequiredRule;
+use JoBins\APIGenerator\Tests\TestCase;
 
 /**
  * Class RequireRuleTest
