@@ -6,8 +6,6 @@ use Illuminate\Testing\TestResponse;
 
 /**
  * Class HasDocsGenerator
- *
- * @package JoBins\APIGenerator
  */
 trait HasDocsGenerator
 {
@@ -74,8 +72,7 @@ trait HasDocsGenerator
     /**
      * Operation Id of swagger api's endpoint.
      *
-     * @param string $operationId
-     *
+     * @param  string  $operationId
      * @return $this
      */
     public function setId(string $operationId)
@@ -95,8 +92,7 @@ trait HasDocsGenerator
     /**
      * Set tags for this endpoint.
      *
-     * @param array $tags
-     *
+     * @param  array  $tags
      * @return self
      */
     public function setTags(array $tags)
@@ -121,8 +117,7 @@ trait HasDocsGenerator
     }
 
     /**
-     * @param array $security
-     *
+     * @param  array  $security
      * @return $this
      */
     public function setSecurity(array $security): self
@@ -133,8 +128,7 @@ trait HasDocsGenerator
     }
 
     /**
-     * @param array $parameters
-     *
+     * @param  array  $parameters
      * @return self
      */
     public function defineParameters(array $parameters): self
@@ -146,7 +140,6 @@ trait HasDocsGenerator
 
     /**
      * @param $schema
-     *
      * @return $this
      */
     public function defineResponseSchema($schema): self
@@ -157,11 +150,10 @@ trait HasDocsGenerator
     }
 
     /**
-     * @param string $method
-     * @param string $uri
-     * @param array  $data
-     * @param array  $headers
-     *
+     * @param  string  $method
+     * @param  string  $uri
+     * @param  array  $data
+     * @param  array  $headers
      * @return TestResponse
      */
     public function jsond(string $method, string $uri, array $data = [], array $headers = []): TestResponse
@@ -183,18 +175,18 @@ trait HasDocsGenerator
     public function getParams(): array
     {
         return [
-            "security" => $this->d_security,
-            "operationID" => $this->d_operationId,
-            "summary" => $this->d_summary,
-            "tags" => $this->d_tags,
-            "rule" => $this->d_request,
-            "data" => $this->d_data,
-            "header" => $this->d_header,
-            "definitions" => $this->d_definitions,
-            "url" => $this->d_url,
-            "method" => $this->d_method,
-            "ignoreData" => $this->d_ignore_request_data,
-            "responseSchema" => $this->d_response_schema,
+            'security'       => $this->d_security,
+            'operationID'    => $this->d_operationId,
+            'summary'        => $this->d_summary,
+            'tags'           => $this->d_tags,
+            'rule'           => $this->d_request,
+            'data'           => $this->d_data,
+            'header'         => $this->d_header,
+            'definitions'    => $this->d_definitions,
+            'url'            => $this->d_url,
+            'method'         => $this->d_method,
+            'ignoreData'     => $this->d_ignore_request_data,
+            'responseSchema' => $this->d_response_schema,
         ];
     }
 }

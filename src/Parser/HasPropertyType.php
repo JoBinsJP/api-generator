@@ -4,13 +4,12 @@ namespace JoBins\APIGenerator\Parser;
 
 use Illuminate\Support\Arr;
 use JoBins\APIGenerator\Rules\ArrayRule;
+use JoBins\APIGenerator\Rules\EnumRule;
 use JoBins\APIGenerator\Rules\FileRule;
 use JoBins\APIGenerator\Rules\IntegerRule;
 
 /**
  * Trait HasPropertyType
- *
- * @package JoBins\APIGenerator\Security
  */
 trait HasPropertyType
 {
@@ -22,19 +21,19 @@ trait HasPropertyType
     protected array $rulesArray = [];
 
     /**
-     * @param array  $rules
-     * @param string $name
+     * @param  array  $rules
+     * @param  string  $name
      *
      * @return array|string[]
      */
     public function getPropertyType(array $rules, string $name): array
     {
-        if (ArrayRule::check($rules)) {
+        if ( ArrayRule::check($rules) ) {
             $rules = Arr::get($this->rulesArray, "{$name}.*");
 
             return [
-                "type" => "array",
-                "items" => $this->getPropertyItemType($rules),
+                'type'  => 'array',
+                'items' => $this->getPropertyItemType($rules),
             ];
         }
 
@@ -42,7 +41,7 @@ trait HasPropertyType
     }
 
     /**
-     * @param array $rulesArray
+     * @param  array  $rulesArray
      */
     public function setRulesArray(array $rulesArray): void
     {
@@ -51,23 +50,31 @@ trait HasPropertyType
 
     private function getPropertyItemType(array $rules): array
     {
-        if (FileRule::check($rules)) {
-            $this->contentType = "multipart/form-data";
+        if ( FileRule::check($rules) ) {
+            $this->contentType = 'multipart/form-data';
 
             return [
-                "type" => "string",
-                "format" => "binary",
+                'type'   => 'string',
+                'format' => 'binary',
             ];
         }
 
-        if (IntegerRule::check($rules)) {
+        if ( IntegerRule::check($rules) ) {
             return [
-                "type" => "integer",
+                'type' => 'integer',
+            ];
+        }
+
+        $enums = EnumRule::data($rules);
+        if ( count($enums) > 0 ) {
+            return [
+                'type' => 'string',
+                'enum' => $enums,
             ];
         }
 
         return [
-            "type" => "string",
+            'type' => 'string',
         ];
     }
 }

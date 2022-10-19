@@ -1,8 +1,7 @@
 <?php
 
 /**
- * @param string $class
- *
+ * @param  string  $class
  * @return string
  */
 function getClassIdentifier(string $class): string

@@ -8,7 +8,7 @@ trait HasSecurity
 {
     public function processSecurity($request): ?array
     {
-        $securities = Arr::get($this->request, "security");
+        $securities = Arr::get($this->request, 'security');
 
         if (empty($securities)) {
             return null;
@@ -20,7 +20,7 @@ trait HasSecurity
             $this->ensureSecuritySchemaExists($schema);
 
             return [
-                $schema["name"] => [],
+                $schema['name'] => [],
             ];
         })->toArray();
     }
@@ -31,11 +31,11 @@ trait HasSecurity
 
         if (data_get($this->data, $key)) {
             return;
-        };
+        }
 
         data_set($this->data, $key, [
-            "type" => "http",
-            "scheme" => "bearer",
+            'type'   => 'http',
+            'scheme' => 'bearer',
         ]);
     }
 }

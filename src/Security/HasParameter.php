@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Route;
 
 /**
  * Trait HasParameter
- *
- * @package JoBins\APIGenerator\Security
  */
 trait HasParameter
 {
@@ -18,8 +16,8 @@ trait HasParameter
      */
     public function preparePathWithParam(): array
     {
-        $url = Arr::get($this->request, "url");
-        $method = Arr::get($this->request, "method");
+        $url    = Arr::get($this->request, 'url');
+        $method = Arr::get($this->request, 'method');
 
         $route = Route::getRoutes()->match(Request::create($url, $method));
 
@@ -28,48 +26,46 @@ trait HasParameter
 
         $parameters = $this->processQuery($queries) + $this->processParameters($route->parameters());
 
-        return ["/".$route->uri(), array_values($parameters)];
+        return ['/'.$route->uri(), array_values($parameters)];
     }
 
     /**
-     * @param array $queries
-     *
+     * @param  array  $queries
      * @return array
      */
     public function processQuery(array $queries): array
     {
-        $definitions = Arr::get($this->request, "definitions");
+        $definitions = Arr::get($this->request, 'definitions');
 
         return collect($queries)->map(function ($value, $param) use ($definitions) {
             return [
-                "in" => "query",
-                "name" => $param,
-                "schema" => [
-                    "type" => is_numeric($value) ? "integer" : "string",
+                'in'     => 'query',
+                'name'   => $param,
+                'schema' => [
+                    'type' => is_numeric($value) ? 'integer' : 'string',
                 ],
-                "description" => Arr::get($definitions, $param) ?? " ",
+                'description' => Arr::get($definitions, $param) ?? ' ',
             ];
         })->toArray();
     }
 
     /**
      * @param $parameters
-     *
      * @return array
      */
     public function processParameters($parameters): array
     {
-        $definitions = Arr::get($this->request, "definitions");
+        $definitions = Arr::get($this->request, 'definitions');
 
         return collect($parameters)->map(function ($value, $param) use ($definitions) {
             return [
-                "in" => "path",
-                "name" => $param,
-                "schema" => [
-                    "type" => is_numeric($value) ? "integer" : "string",
+                'in'     => 'path',
+                'name'   => $param,
+                'schema' => [
+                    'type' => is_numeric($value) ? 'integer' : 'string',
                 ],
-                "required" => true,
-                "description" => Arr::get($definitions, $param) ?? " ",
+                'required'    => true,
+                'description' => Arr::get($definitions, $param) ?? ' ',
             ];
         })->toArray();
     }

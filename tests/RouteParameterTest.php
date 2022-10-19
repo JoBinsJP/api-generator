@@ -7,8 +7,6 @@ use JoBins\APIGenerator\Traits\HasDocsGenerator;
 
 /**
  * Class RouteParameterTest
- *
- * @package JoBins\APIGenerator\Tests
  */
 class RouteParameterTest extends TestCase
 {
@@ -24,33 +22,32 @@ class RouteParameterTest extends TestCase
     /** @test */
     public function it_generates_route_parameters()
     {
-        $this->setSummary("Register a new user.")
-            ->setId("UserDetail")
+        $this->setSummary('Register a new user.')
+            ->setId('UserDetail')
             ->defineParameters([
-                "id" => "Numeric ID of the user to get",
+                'id' => 'Numeric ID of the user to get',
             ])
-            ->jsond("get", route("users.show", ["id" => 1, "from" => "2020-12-12", "to" => "2020-01-12"]))
+            ->jsond('get', route('users.show', ['id' => 1, 'from' => '2020-12-12', 'to' => '2020-01-12']))
             ->assertStatus(200)
             ->generate($this, true);
 
-
         $json = getJsonFromDocs();
-        $this->assertCount(3, Arr::get($json, "paths./api/users/{id}.get.parameters") ?? []);
+        $this->assertCount(3, Arr::get($json, 'paths./api/users/{id}.get.parameters') ?? []);
     }
 
     /** @test */
     public function it_generates_route_parameters_with_query()
     {
-        $this->setSummary("Get a list of Users.")
-            ->setId("UserList")
+        $this->setSummary('Get a list of Users.')
+            ->setId('UserList')
             ->defineParameters([
-                "id" => "Numeric ID of the user to get",
+                'id' => 'Numeric ID of the user to get',
             ])
-            ->jsond("get", route("users.index", ["from" => "2020-12-12", "to" => "2020-01-12"]))
+            ->jsond('get', route('users.index', ['from' => '2020-12-12', 'to' => '2020-01-12']))
             ->assertStatus(200)
             ->generate($this, true);
 
         $json = getJsonFromDocs();
-        $this->assertCount(2, Arr::get($json, "paths./api/users.get.parameters"));
+        $this->assertCount(2, Arr::get($json, 'paths./api/users.get.parameters'));
     }
 }

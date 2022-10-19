@@ -12,8 +12,7 @@ trait ProcessRequestTrait
     protected array $request;
 
     /**
-     * @param array $request
-     *
+     * @param  array  $request
      * @return $this
      */
     public function setRequest(array $request): self
@@ -25,12 +24,14 @@ trait ProcessRequestTrait
 
     private function parseRequestBody(): ?array
     {
-        if (! ($className = Arr::get($this->request, "rule"))) {
+        $className = Arr::get($this->request, 'rule');
+
+        if (empty($className)) {
             return null;
         }
 
         return [
-            "\$ref" => "#/components/requestBodies/".getClassIdentifier($className),
+            '$ref' => '#/components/requestBodies/'.getClassIdentifier($className),
         ];
     }
 }

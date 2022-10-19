@@ -7,28 +7,26 @@ use JoBins\APIGenerator\Contract\Description;
 
 /**
  * Class FormRequestImageArray
- *
- * @package JoBins\APIGenerator\Tests\Stubs
  */
 class FormRequestImageArray extends FormRequest implements Description
 {
     public function rules()
     {
         return [
-            "profile" => "required|image",
-            "images" => "nullable|sometimes|array|min:1|max:10",
-            "images.*" => "image",
-            "keys" => "array",
-            "keys.*" => "integer",
+            'profile'  => 'required|image',
+            'images'   => 'nullable|sometimes|array|min:1|max:10',
+            'images.*' => 'image',
+            'keys'     => 'array',
+            'keys.*'   => 'integer',
         ];
     }
 
     public function descriptions(): array
     {
         return [
-            "profiles" => "Profiles",
-            "images" => "Images only",
-            "keys.*" => "Asterik",
+            'profiles' => 'Profiles',
+            'images'   => 'Images only',
+            'keys.*'   => 'Asterik',
         ];
     }
 }

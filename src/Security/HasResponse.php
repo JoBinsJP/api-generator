@@ -9,27 +9,27 @@ trait HasResponse
 {
     public function processResponse()
     {
-        $schemas = Arr::get($this->request, "responseSchema");
+        $schemas = Arr::get($this->request, 'responseSchema');
 
-        $properties = Arr::get($schemas, "define", []);
+        $properties = Arr::get($schemas, 'define', []);
 
         return collect($properties)->map(function ($properties, $attribute) {
-            $type = "object";
+            $type = 'object';
 
-            $refSchemaName = Arr::get($properties, "refSchema");
+            $refSchemaName = Arr::get($properties, 'refSchema');
 
-            if (Str::contains($attribute, "*") && $refSchemaName) {
+            if (Str::contains($attribute, '*') && $refSchemaName) {
                 return [
-                    "type" => "array",
-                    "items" => [
-                        "\$ref" => "#/components/schemas/{$refSchemaName}",
+                    'type'  => 'array',
+                    'items' => [
+                        '$ref' => "#/components/schemas/{$refSchemaName}",
                     ],
                 ];
             }
 
             if ($refSchemaName) {
                 return [
-                    "\$ref" => "#/components/schemas/{$refSchemaName}",
+                    '$ref' => "#/components/schemas/{$refSchemaName}",
                 ];
             }
             if ($this->getSchemaName() && is_array($properties)) {
@@ -37,13 +37,13 @@ trait HasResponse
                 $this->defineSchema($schemaName, $type, $properties);
 
                 return [
-                    "\$ref" => "#/components/schemas/{$schemaName}",
+                    '$ref' => "#/components/schemas/{$schemaName}",
                 ];
             }
 
             return [
-                "type" => "string",
-                "description" => $properties,
+                'type'        => 'string',
+                'description' => $properties,
             ];
         })->toArray();
     }
@@ -52,23 +52,23 @@ trait HasResponse
     {
         $code = $this->response->getStatusCode();
 
-        $schema = [];
+        $schema     = [];
         $properties = $this->processResponse();
         if (! empty($properties)) {
-            $schema["properties"] = $this->processResponse();
+            $schema['properties'] = $this->processResponse();
         }
 
         $example = json_decode($this->response->getContent(), true) ?? [];
         if (! empty($example)) {
-            $schema["example"] = $example;
+            $schema['example'] = $example;
         }
 
         $responseData = [
             $code => [
-                "description" => "{$code} status response",
-                "content" => [
-                    "application/json" => [
-                        "schema" => $schema,
+                'description' => "{$code} status response",
+                'content'     => [
+                    'application/json' => [
+                        'schema' => $schema,
                     ],
                 ],
             ],
@@ -80,11 +80,11 @@ trait HasResponse
     private function defineSchema(string $name, string $type, array $properties)
     {
         $schemaData = [
-            "type" => $type,
-            "items" => [
-                "type" => "object",
+            'type'  => $type,
+            'items' => [
+                'type' => 'object',
             ],
-            "properties" => $this->getSchemaProperties($properties),
+            'properties' => $this->getSchemaProperties($properties),
         ];
 
         data_set($this->data, "components.schemas.{$name}", $schemaData);
@@ -94,8 +94,8 @@ trait HasResponse
     {
         return collect($properties)->map(function ($definition) {
             return [
-                "type" => "string",
-                "description" => $definition,
+                'type'        => 'string',
+                'description' => $definition,
             ];
         })->toArray();
     }
@@ -112,8 +112,8 @@ trait HasResponse
      */
     private function getSchemaName()
     {
-        $schemas = Arr::get($this->request, "responseSchema");
+        $schemas = Arr::get($this->request, 'responseSchema');
 
-        return Arr::get($schemas, "schema");
+        return Arr::get($schemas, 'schema');
     }
 }

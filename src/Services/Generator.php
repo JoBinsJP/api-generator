@@ -12,7 +12,6 @@ use JoBins\APIGenerator\Security\HasServer;
 
 /**
  * Class Generator
- * @package JoBins\APIGenerator
  */
 class Generator
 {
@@ -27,20 +26,20 @@ class Generator
     /** @var */
     protected $response = [];
 
-    protected string $filePath = "";
+    protected string $filePath = '';
 
-    protected string $url = "";
+    protected string $url = '';
 
     public function __construct()
     {
         $this->initializeFile();
 
         $this->data = array_merge($this->data, [
-            "servers" => $this->processServer(config()->get("api-generator")),
-            "openapi" => config()->get("api-generator.openapi"),
-            "info" => [
-                "title" => config()->get("api-generator.title"),
-                "version" => config()->get("api-generator.version"),
+            'servers' => $this->processServer(config()->get('api-generator')),
+            'openapi' => config()->get('api-generator.openapi'),
+            'info'    => [
+                'title'   => config()->get('api-generator.title'),
+                'version' => config()->get('api-generator.version'),
             ],
         ]);
     }
@@ -50,9 +49,9 @@ class Generator
      */
     public function initializeFile(): void
     {
-        $this->filePath = config()->get("api-generator.file-path");
+        $this->filePath = config()->get('api-generator.file-path');
 
-        $path = pathinfo($this->filePath)["dirname"];
+        $path = pathinfo($this->filePath)['dirname'];
 
         if (! file_exists($path)) {
             mkdir($path, 0777, true);
@@ -81,11 +80,11 @@ class Generator
 
     public function getBasicPathInfo(array $pathData, $parameters): array
     {
-        $responseData = Arr::get($pathData, "responses", []);
+        $responseData = Arr::get($pathData, 'responses', []);
 
         $return = $this->getBasicPathInfoData($responseData);
 
-        data_set($return, "parameters", $parameters);
+        data_set($return, 'parameters', $parameters);
 
         return $return;
     }
@@ -95,22 +94,22 @@ class Generator
         $data = [];
 
         if ($security = $this->processSecurity($this->request)) {
-            $data["security"] = $security;
+            $data['security'] = $security;
         }
 
-        $data["summary"] = $this->request["summary"];
+        $data['summary'] = $this->request['summary'];
 
-        if ($tags = Arr::get($this->request, "tags")) {
-            $data["tags"] = $tags;
+        if ($tags = Arr::get($this->request, 'tags')) {
+            $data['tags'] = $tags;
         }
 
-        $data["operationId"] = $this->request["operationID"];
+        $data['operationId'] = $this->request['operationID'];
 
         if ($requestBody = $this->parseRequestBody()) {
-            $data["requestBody"] = $requestBody;
+            $data['requestBody'] = $requestBody;
         }
 
-        $data["responses"] = $this->parseResponse($responseData);
+        $data['responses'] = $this->parseResponse($responseData);
 
         return $data;
     }
@@ -118,20 +117,20 @@ class Generator
     private function parseParam()
     {
         [$url, $parameters] = $this->preparePathWithParam();
-        $method = $this->request["method"];
-        $pathKey = "paths.{$url}.{$method}";
+        $method             = $this->request['method'];
+        $pathKey            = "paths.{$url}.{$method}";
 
         $pathData = Arr::get($this->data, $pathKey, []);
         $pathData = $pathData + $this->getBasicPathInfo($pathData, $parameters);
 
         data_set($this->data, $pathKey, $pathData);
 
-        $requestBodies = Arr::get($this->data, "components.requestBodies", []);
+        $requestBodies = Arr::get($this->data, 'components.requestBodies', []);
 
         $requestBodies = $requestBodies + (new RequestBodyComponent($this->request))->parseRequestBodies();
 
         if (! empty($requestBodies)) {
-            data_set($this->data, "components.requestBodies", $requestBodies);
+            data_set($this->data, 'components.requestBodies', $requestBodies);
         }
     }
 }
