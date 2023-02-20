@@ -13,7 +13,7 @@ class FormRequestInArray extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', new EmailRule],
+            'email' => ['required', new EmailRule()],
         ];
     }
 }

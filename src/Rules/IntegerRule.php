@@ -7,7 +7,7 @@ class IntegerRule implements RuleContract
     /**
      * Rules that is valid for required.
      */
-    const CONTAIN = ['integer'];
+    public const CONTAIN = ['integer'];
 
     /**
      * @param  array  $rules

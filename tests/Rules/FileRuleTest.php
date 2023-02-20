@@ -18,7 +18,7 @@ class FileRuleTest extends TestCase
      */
     public function it_validates_file($rules, $expected)
     {
-        $this->assertEquals($expected, (new FileRule)->check($rules));
+        $this->assertEquals($expected, (new FileRule())->check($rules));
     }
 
     public function fileRuleDataProvider(): array

@@ -15,7 +15,7 @@ trait HasSecurity
         }
 
         return collect($securities)->map(function (string $security) {
-            $schema = (new $security)->getSchema();
+            $schema = (new $security())->getSchema();
 
             $this->ensureSecuritySchemaExists($schema);
 

@@ -42,7 +42,7 @@ class APIGeneratorServiceProvider extends ServiceProvider
             /** @var JsonResponse $response */
             $response = $this;
 
-            (new Generator)->setRequest($testCase->getParams())->setResponse($response)->generate();
+            (new Generator())->setRequest($testCase->getParams())->setResponse($response)->generate();
         });
     }
 }

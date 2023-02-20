@@ -10,7 +10,7 @@ class ArrayRule implements RuleContract
     /**
      * Rules that is valid for required.
      */
-    const CONTAIN = ['array'];
+    public const CONTAIN = ['array'];
 
     /**
      * @param  array  $rules

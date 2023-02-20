@@ -68,7 +68,7 @@ class FormRequestRuleTest extends TestCase
         $properties = Arr::get($schema, 'schema.properties');
 
         foreach ($properties as $key => $property) {
-            $expected = Arr::get((new RuleExampleFormRequest)->descriptions(), $key);
+            $expected = Arr::get((new RuleExampleFormRequest())->descriptions(), $key);
 
             $this->assertEquals($expected, $property['description'] ?? null);
         }

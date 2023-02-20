@@ -17,7 +17,7 @@ class RequireRuleTest extends TestCase
      */
     public function test_required_rule($rules, $expected)
     {
-        $this->assertEquals($expected, (new RequiredRule)->check($rules));
+        $this->assertEquals($expected, (new RequiredRule())->check($rules));
     }
 
     public function requiredRuleDataProvider()

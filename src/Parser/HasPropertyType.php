@@ -28,7 +28,7 @@ trait HasPropertyType
      */
     public function getPropertyType(array $rules, string $name): array
     {
-        if ( ArrayRule::check($rules) ) {
+        if (ArrayRule::check($rules)) {
             $rules = Arr::get($this->rulesArray, "{$name}.*");
 
             return [
@@ -50,7 +50,7 @@ trait HasPropertyType
 
     private function getPropertyItemType(array $rules): array
     {
-        if ( FileRule::check($rules) ) {
+        if (FileRule::check($rules)) {
             $this->contentType = 'multipart/form-data';
 
             return [
@@ -59,14 +59,14 @@ trait HasPropertyType
             ];
         }
 
-        if ( IntegerRule::check($rules) ) {
+        if (IntegerRule::check($rules)) {
             return [
                 'type' => 'integer',
             ];
         }
 
         $enums = EnumRule::data($rules);
-        if ( count($enums) > 0 ) {
+        if (count($enums) > 0) {
             return [
                 'type' => 'string',
                 'enum' => $enums,

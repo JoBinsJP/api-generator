@@ -10,12 +10,12 @@ class RequiredRule
     /**
      * Rules that is valid for required.
      */
-    const CONTAIN = ['required'];
+    public const CONTAIN = ['required'];
 
     /**
      * Rules that shouldn't present to be required.
      */
-    const NOT_CONTAIN = ['sometimes', 'nullable'];
+    public const NOT_CONTAIN = ['sometimes', 'nullable'];
 
     /**
      * @param  array  $rules

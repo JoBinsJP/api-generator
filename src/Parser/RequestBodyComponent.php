@@ -84,7 +84,7 @@ class RequestBodyComponent
         }
 
         /** @var FormRequest $class */
-        $class = new $className;
+        $class = new $className();
 
         // Set rules of a class for global access.
         $rules = $this->getRules($class);
@@ -106,7 +106,6 @@ class RequestBodyComponent
         $data = [];
 
         foreach ($rules as $name => $item) {
-
             // Ex. If image.* and image are present remove
             if (in_array(Str::slug($name), array_keys($data))) {
                 continue;
