@@ -33,7 +33,9 @@
         "test": "vendor/bin/phpunit",
         "psalm": "vendor/bin/psalm",
         "pint": "vendor/bin/pint",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "style-check": "php-cs-fixer fix --dry-run --verbose --diff",
+        "style-fix": "php-cs-fixer fix --verbose"
     },
     "autoload-dev": {
         "psr-4": {
@@ -46,7 +48,8 @@
     "require-dev": {
         "orchestra/testbench": "^6.15",
         "phpunit/phpunit": "^9.0",
-        "vimeo/psalm": "^4.7"
+        "vimeo/psalm": "^4.7",
+        "friendsofphp/php-cs-fixer": "^3.14"
     },
     "extra": {
         "laravel": {
