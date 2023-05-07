@@ -9,7 +9,7 @@ class RuleExampleFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'      => 'required',
+            'name' => 'required',
             'full_name' => 'sometimes|required',
             'last_name' => 'nullable|required',
         ];

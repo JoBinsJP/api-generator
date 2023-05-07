@@ -9,10 +9,6 @@ use Illuminate\Support\Arr;
  */
 trait HasServer
 {
-    /**
-     * @param  array  $config
-     * @return array
-     */
     public function processServer(array $config): array
     {
         return [

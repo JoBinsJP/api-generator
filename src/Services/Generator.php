@@ -23,7 +23,6 @@ class Generator
 
     protected array $data = [];
 
-    /** @var */
     protected $response = [];
 
     protected string $filePath = '';
@@ -37,8 +36,8 @@ class Generator
         $this->data = array_merge($this->data, [
             'servers' => $this->processServer(config()->get('api-generator')),
             'openapi' => config()->get('api-generator.openapi'),
-            'info'    => [
-                'title'   => config()->get('api-generator.title'),
+            'info' => [
+                'title' => config()->get('api-generator.title'),
                 'version' => config()->get('api-generator.version'),
             ],
         ]);
@@ -117,8 +116,8 @@ class Generator
     private function parseParam()
     {
         [$url, $parameters] = $this->preparePathWithParam();
-        $method             = $this->request['method'];
-        $pathKey            = "paths.{$url}.{$method}";
+        $method = $this->request['method'];
+        $pathKey = "paths.{$url}.{$method}";
 
         $pathData = Arr::get($this->data, $pathKey, []);
         $pathData = $pathData + $this->getBasicPathInfo($pathData, $parameters);

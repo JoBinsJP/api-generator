@@ -24,9 +24,6 @@ trait HasDocsGenerator
      */
     protected $d_data;
 
-    /**
-     * @var
-     */
     protected $d_header;
 
     /**
@@ -34,9 +31,6 @@ trait HasDocsGenerator
      */
     protected $d_summary;
 
-    /**
-     * @var array
-     */
     protected array $d_tags = [];
 
     /**
@@ -49,19 +43,10 @@ trait HasDocsGenerator
      */
     protected $d_request;
 
-    /**
-     * @var
-     */
     protected $d_definitions;
 
-    /**
-     * @var
-     */
     protected array $d_security = [];
 
-    /**
-     * @var
-     */
     protected $d_response_schema;
 
     /**
@@ -72,7 +57,6 @@ trait HasDocsGenerator
     /**
      * Operation Id of swagger api's endpoint.
      *
-     * @param  string  $operationId
      * @return $this
      */
     public function setId(string $operationId)
@@ -92,7 +76,6 @@ trait HasDocsGenerator
     /**
      * Set tags for this endpoint.
      *
-     * @param  array  $tags
      * @return self
      */
     public function setTags(array $tags)
@@ -117,7 +100,6 @@ trait HasDocsGenerator
     }
 
     /**
-     * @param  array  $security
      * @return $this
      */
     public function setSecurity(array $security): self
@@ -127,10 +109,6 @@ trait HasDocsGenerator
         return $this;
     }
 
-    /**
-     * @param  array  $parameters
-     * @return self
-     */
     public function defineParameters(array $parameters): self
     {
         $this->d_definitions = $parameters;
@@ -139,7 +117,6 @@ trait HasDocsGenerator
     }
 
     /**
-     * @param $schema
      * @return $this
      */
     public function defineResponseSchema($schema): self
@@ -149,13 +126,6 @@ trait HasDocsGenerator
         return $this;
     }
 
-    /**
-     * @param  string  $method
-     * @param  string  $uri
-     * @param  array  $data
-     * @param  array  $headers
-     * @return TestResponse
-     */
     public function jsond(string $method, string $uri, array $data = [], array $headers = []): TestResponse
     {
         $this->d_method = $method;
@@ -169,23 +139,20 @@ trait HasDocsGenerator
         return $this->json($method, $uri, $data, $headers);
     }
 
-    /**
-     * @return array
-     */
     public function getParams(): array
     {
         return [
-            'security'       => $this->d_security,
-            'operationID'    => $this->d_operationId,
-            'summary'        => $this->d_summary,
-            'tags'           => $this->d_tags,
-            'rule'           => $this->d_request,
-            'data'           => $this->d_data,
-            'header'         => $this->d_header,
-            'definitions'    => $this->d_definitions,
-            'url'            => $this->d_url,
-            'method'         => $this->d_method,
-            'ignoreData'     => $this->d_ignore_request_data,
+            'security' => $this->d_security,
+            'operationID' => $this->d_operationId,
+            'summary' => $this->d_summary,
+            'tags' => $this->d_tags,
+            'rule' => $this->d_request,
+            'data' => $this->d_data,
+            'header' => $this->d_header,
+            'definitions' => $this->d_definitions,
+            'url' => $this->d_url,
+            'method' => $this->d_method,
+            'ignoreData' => $this->d_ignore_request_data,
             'responseSchema' => $this->d_response_schema,
         ];
     }

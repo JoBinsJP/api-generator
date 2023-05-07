@@ -20,8 +20,6 @@ function getJsonFromDocs()
 }
 
 /**
- * @param    $requestClass
- * @param  string  $contentType
  * @return array|ArrayAccess|mixed
  */
 function getRequestBodyScheme($requestClass, string $contentType = 'application/json')

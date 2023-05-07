@@ -22,7 +22,7 @@ class TestCase extends BaseTestCase
      */
     protected function getPackageProviders($app)
     {
-//        $app->setBasePath(__DIR__.'/..');
+        //        $app->setBasePath(__DIR__.'/..');
 
         return [
             APIGeneratorServiceProvider::class,

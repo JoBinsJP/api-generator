@@ -10,7 +10,6 @@ use Illuminate\Http\JsonResponse;
 class ExampleController
 {
     /**
-     * @param  ExampleFormRequest  $request
      * @return JsonResponse
      */
     public function index(ExampleFormRequest $request)

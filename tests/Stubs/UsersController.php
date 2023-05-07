@@ -9,15 +9,12 @@ use Illuminate\Http\JsonResponse;
  */
 class UsersController
 {
-    /**
-     * @return JsonResponse
-     */
     public function index(): JsonResponse
     {
         return response()->json(
             [
                 'message' => 'List of Users',
-                'data'    => [
+                'data' => [
                     ['id' => 1, 'name' => 'Vedas Bomjon', 'email' => 'bedram@jobins.jp'],
                     ['id' => 2, 'name' => 'Puncoz', 'email' => 'puncoz@jobins.jp'],
                 ],
@@ -30,12 +27,12 @@ class UsersController
         return response()->json(
             [
                 'message' => 'Detail of a User.',
-                'data'    => [
-                    'id'      => 1,
-                    'name'    => 'Vedas Bomjon',
-                    'email'   => 'bedram@jobins.jp',
+                'data' => [
+                    'id' => 1,
+                    'name' => 'Vedas Bomjon',
+                    'email' => 'bedram@jobins.jp',
                     'company' => [
-                        'name'    => 'JoBins Inc.',
+                        'name' => 'JoBins Inc.',
                         'country' => 'Japan',
                     ],
                 ],
