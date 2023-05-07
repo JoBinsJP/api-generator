@@ -15,20 +15,12 @@ class RequestBodyComponent
 {
     use HasPropertyType;
 
-    /**
-     * @var array
-     */
     protected array $request;
 
-    /**
-     * @var string
-     */
     protected string $contentType = 'application/json';
 
     /**
      * ParseRequestBody constructor.
-     *
-     * @param  array  $request
      */
     public function __construct(array $request)
     {
@@ -63,10 +55,10 @@ class RequestBodyComponent
 
     public function getParseSchema(array $request): array
     {
-        $data           = [];
+        $data = [];
         $data['schema'] = [
-            'type'       => 'object',
-            'required'   => $this->getRequired($request),
+            'type' => 'object',
+            'required' => $this->getRequired($request),
             'properties' => $this->getProperties($request),
         ];
 

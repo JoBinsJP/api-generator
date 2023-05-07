@@ -6,13 +6,9 @@ use Illuminate\Support\Arr;
 
 trait ProcessRequestTrait
 {
-    /**
-     * @var array
-     */
     protected array $request;
 
     /**
-     * @param  array  $request
      * @return $this
      */
     public function setRequest(array $request): self

@@ -17,10 +17,6 @@ class RequiredRule
      */
     const NOT_CONTAIN = ['sometimes', 'nullable'];
 
-    /**
-     * @param  array  $rules
-     * @return bool
-     */
     public static function check(array $rules): bool
     {
         if (count(array_intersect(self::CONTAIN, $rules)) == 0) {

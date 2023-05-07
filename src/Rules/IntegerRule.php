@@ -9,10 +9,6 @@ class IntegerRule implements RuleContract
      */
     const CONTAIN = ['integer'];
 
-    /**
-     * @param  array  $rules
-     * @return bool
-     */
     public static function check(array $rules): bool
     {
         if (count(array_intersect(self::CONTAIN, $rules)) > 0) {

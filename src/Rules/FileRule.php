@@ -16,10 +16,6 @@ class FileRule implements RuleContract
      */
     const STR_INCLUDES = ['mimes', 'mimetypes', 'dimensions'];
 
-    /**
-     * @param  array  $rules
-     * @return bool
-     */
     public static function check(array $rules): bool
     {
         foreach ($rules as $rule) {

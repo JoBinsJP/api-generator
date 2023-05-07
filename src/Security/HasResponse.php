@@ -20,7 +20,7 @@ trait HasResponse
 
             if (Str::contains($attribute, '*') && $refSchemaName) {
                 return [
-                    'type'  => 'array',
+                    'type' => 'array',
                     'items' => [
                         '$ref' => "#/components/schemas/{$refSchemaName}",
                     ],
@@ -42,7 +42,7 @@ trait HasResponse
             }
 
             return [
-                'type'        => 'string',
+                'type' => 'string',
                 'description' => $properties,
             ];
         })->toArray();
@@ -52,7 +52,7 @@ trait HasResponse
     {
         $code = $this->response->getStatusCode();
 
-        $schema     = [];
+        $schema = [];
         $properties = $this->processResponse();
         if (! empty($properties)) {
             $schema['properties'] = $this->processResponse();
@@ -66,7 +66,7 @@ trait HasResponse
         $responseData = [
             $code => [
                 'description' => "{$code} status response",
-                'content'     => [
+                'content' => [
                     'application/json' => [
                         'schema' => $schema,
                     ],
@@ -80,7 +80,7 @@ trait HasResponse
     private function defineSchema(string $name, string $type, array $properties)
     {
         $schemaData = [
-            'type'  => $type,
+            'type' => $type,
             'items' => [
                 'type' => 'object',
             ],
@@ -94,7 +94,7 @@ trait HasResponse
     {
         return collect($properties)->map(function ($definition) {
             return [
-                'type'        => 'string',
+                'type' => 'string',
                 'description' => $definition,
             ];
         })->toArray();

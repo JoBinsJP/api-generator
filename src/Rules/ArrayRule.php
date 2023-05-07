@@ -12,10 +12,6 @@ class ArrayRule implements RuleContract
      */
     const CONTAIN = ['array'];
 
-    /**
-     * @param  array  $rules
-     * @return bool
-     */
     public static function check(array $rules): bool
     {
         $rules = collect($rules)->filter(function ($item) {
